@@ -1,0 +1,2178 @@
+<!doctype html>
+<html lang="uk" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="AVA EYE Cinematic 1.1.1 — bilingual Ukrainian and English user manual for Unreal Engine 5.8.">
+  <title>AVA EYE Cinematic 1.1.1 — Посібник користувача</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d131a'/%3E%3Cpath d='M8 32c7-11 15-16 24-16s17 5 24 16c-7 11-15 16-24 16S15 43 8 32Z' fill='none' stroke='%2367d6e8' stroke-width='5'/%3E%3Ccircle cx='32' cy='32' r='8' fill='%23ffb454'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #090d12;
+      --bg-soft: #0d131a;
+      --surface: #111923;
+      --surface-2: #17212c;
+      --surface-3: #1d2a36;
+      --text: #eef5f8;
+      --muted: #9eacb8;
+      --faint: #6f7e8b;
+      --line: #2b3946;
+      --line-strong: #3a4c5a;
+      --accent: #67d6e8;
+      --accent-strong: #27b6cf;
+      --accent-soft: rgba(103, 214, 232, 0.12);
+      --warm: #ffb454;
+      --warm-soft: rgba(255, 180, 84, 0.12);
+      --good: #72d99f;
+      --good-soft: rgba(114, 217, 159, 0.12);
+      --danger: #ff7c86;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+      --radius: 14px;
+      --radius-sm: 9px;
+      --sidebar: 292px;
+      --content: 920px;
+    }
+
+    html[data-theme="light"] {
+      --bg: #edf2f5;
+      --bg-soft: #f7fafb;
+      --surface: #ffffff;
+      --surface-2: #f1f5f7;
+      --surface-3: #e7eef2;
+      --text: #13202a;
+      --muted: #51616d;
+      --faint: #71808b;
+      --line: #ced9df;
+      --line-strong: #b4c4cd;
+      --accent: #057d93;
+      --accent-strong: #006b80;
+      --accent-soft: rgba(0, 125, 147, 0.09);
+      --warm: #a75b00;
+      --warm-soft: rgba(167, 91, 0, 0.09);
+      --good: #087a45;
+      --good-soft: rgba(8, 122, 69, 0.09);
+      --danger: #b82f3b;
+      --shadow: 0 20px 60px rgba(27, 48, 60, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      margin: 0;
+      min-width: 300px;
+      background:
+        radial-gradient(circle at 82% -10%, rgba(39, 182, 207, 0.10), transparent 34rem),
+        var(--bg);
+      color: var(--text);
+      font: 16px/1.65 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0.006em;
+    }
+    button, input { font: inherit; }
+    button { color: inherit; }
+    a { color: var(--accent); text-underline-offset: 0.18em; }
+    a:hover { color: var(--warm); }
+    code, kbd {
+      font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+      font-size: 0.9em;
+    }
+    code {
+      padding: 0.1em 0.35em;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--surface-2);
+      overflow-wrap: anywhere;
+    }
+    kbd {
+      padding: 0.14em 0.42em;
+      border: 1px solid var(--line-strong);
+      border-bottom-width: 2px;
+      border-radius: 5px;
+      background: var(--surface-2);
+      color: var(--muted);
+    }
+
+    .skip-link {
+      position: fixed;
+      z-index: 1000;
+      top: 10px;
+      left: 10px;
+      transform: translateY(-160%);
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: var(--accent-strong);
+      color: #041014;
+      font-weight: 800;
+    }
+    .skip-link:focus { transform: none; }
+
+    .topbar {
+      position: sticky;
+      z-index: 50;
+      top: 0;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-height: 66px;
+      padding: 10px max(18px, calc((100vw - 1460px) / 2));
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--bg-soft) 92%, transparent);
+      backdrop-filter: blur(18px);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+      gap: 11px;
+    }
+    .brand-mark {
+      display: block;
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
+      border-radius: 8px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.36));
+    }
+    .brand-copy { min-width: 0; line-height: 1.15; }
+    .brand-title { font-size: 0.93rem; font-weight: 850; letter-spacing: 0.095em; white-space: nowrap; }
+    .brand-meta { margin-top: 4px; color: var(--muted); font-size: 0.74rem; white-space: nowrap; }
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+    }
+    .lang-switch {
+      display: inline-grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 3px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--surface);
+    }
+    .lang-button, .icon-button, .menu-button {
+      min-height: 38px;
+      border: 0;
+      border-radius: 7px;
+      background: transparent;
+      cursor: pointer;
+    }
+    .lang-button {
+      min-width: 48px;
+      padding: 6px 10px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+    .lang-button[aria-pressed="true"] {
+      background: var(--accent-soft);
+      color: var(--accent);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 38%, transparent);
+    }
+    .icon-button, .menu-button {
+      display: inline-grid;
+      place-items: center;
+      min-width: 40px;
+      padding: 7px 9px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--muted);
+    }
+    .icon-button:hover, .menu-button:hover { border-color: var(--line-strong); color: var(--text); }
+    .menu-button { display: none; }
+
+    .page-shell {
+      display: grid;
+      grid-template-columns: var(--sidebar) minmax(0, var(--content));
+      justify-content: center;
+      align-items: start;
+      gap: 44px;
+      width: min(100% - 36px, 1320px);
+      margin: 0 auto;
+      padding: 34px 0 90px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 96px;
+      max-height: calc(100vh - 118px);
+      overflow: auto;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in srgb, var(--surface) 92%, transparent);
+      box-shadow: var(--shadow);
+    }
+    .sidebar-title {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 850;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .search-wrap { position: relative; margin-bottom: 14px; }
+    .search-wrap::before {
+      content: "⌕";
+      position: absolute;
+      top: 7px;
+      left: 11px;
+      color: var(--faint);
+      font-size: 1.2rem;
+      pointer-events: none;
+    }
+    .search {
+      width: 100%;
+      min-height: 42px;
+      padding: 8px 34px 8px 34px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      outline: 0;
+      background: var(--bg-soft);
+      color: var(--text);
+    }
+    .search:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    .clear-search {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      display: none;
+      width: 32px;
+      height: 32px;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .clear-search.visible { display: block; }
+    .toc { display: grid; gap: 3px; }
+    .toc[hidden] { display: none !important; }
+    .toc a {
+      display: grid;
+      grid-template-columns: 27px 1fr;
+      gap: 8px;
+      align-items: baseline;
+      padding: 7px 8px;
+      border-radius: 7px;
+      color: var(--muted);
+      font-size: 0.91rem;
+      text-decoration: none;
+    }
+    .toc a:hover { background: var(--surface-2); color: var(--text); }
+    .toc a.active { background: var(--accent-soft); color: var(--accent); }
+    .toc a.search-hidden { display: none; }
+    .toc-index { color: var(--faint); font: 0.75rem/1.3 "Cascadia Code", monospace; }
+    .toc-empty { display: none; padding: 9px; color: var(--muted); font-size: 0.88rem; }
+    .toc-empty.visible { display: block; }
+    .sidebar-note {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      color: var(--faint);
+      font-size: 0.78rem;
+    }
+
+    main { min-width: 0; }
+    .language-panel[hidden] { display: none !important; }
+    .document-head {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      border: 1px solid rgba(142, 161, 174, 0.26);
+      border-radius: 20px;
+      background: #090b0d;
+      color: #f4f7f9;
+      box-shadow: var(--shadow);
+    }
+    .document-head::after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      background:
+        linear-gradient(90deg, #f3ad33 0%, #f3ad33 22%, var(--accent) 61%, transparent 100%) top / 100% 2px no-repeat,
+        linear-gradient(180deg, transparent 72%, rgba(4, 10, 13, 0.16) 100%);
+      pointer-events: none;
+    }
+    .document-hero-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .document-intro {
+      margin-top: 18px;
+      padding: clamp(24px, 4vw, 38px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 100% 0%, var(--accent-soft), transparent 28rem),
+        var(--surface);
+      box-shadow: var(--shadow);
+    }
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--accent);
+      font-size: 0.76rem;
+      font-weight: 850;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, h4 { line-height: 1.18; letter-spacing: -0.025em; }
+    h1 { max-width: 780px; margin: 0; font-size: clamp(2.25rem, 5vw, 4.1rem); }
+    .lede { max-width: 720px; margin: 22px 0 0; color: var(--muted); font-size: clamp(1.02rem, 2vw, 1.22rem); }
+    .document-intro h1 { max-width: 780px; font-size: clamp(2.1rem, 4.2vw, 3.5rem); }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+    .meta-pill {
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--bg-soft) 80%, transparent);
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .meta-pill.accent { border-color: color-mix(in srgb, var(--accent) 36%, var(--line)); color: var(--accent); }
+
+    .workflow-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin: 18px 0 6px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--surface);
+    }
+    .workflow-step {
+      position: relative;
+      padding: 15px 14px 16px;
+      border-right: 1px solid var(--line);
+    }
+    .workflow-step:last-child { border-right: 0; }
+    .workflow-step strong { display: block; margin-bottom: 2px; font-size: 0.9rem; }
+    .workflow-step span { color: var(--muted); font-size: 0.78rem; }
+    .workflow-step::before {
+      content: attr(data-step);
+      display: block;
+      margin-bottom: 6px;
+      color: var(--accent);
+      font: 750 0.73rem/1 "Cascadia Code", monospace;
+    }
+
+    .manual-section {
+      margin-top: 58px;
+      padding-top: 4px;
+      outline: 0;
+    }
+    .section-kicker { margin: 0 0 6px; color: var(--accent); font: 750 0.75rem/1.2 "Cascadia Code", monospace; }
+    h2 { margin: 0 0 18px; font-size: clamp(1.65rem, 3.5vw, 2.35rem); }
+    h3 { margin: 30px 0 10px; font-size: 1.2rem; }
+    h4 { margin: 20px 0 8px; font-size: 1rem; }
+    p { margin: 0 0 16px; }
+    ul, ol { margin: 12px 0 18px; padding-left: 1.35rem; }
+    li + li { margin-top: 7px; }
+    .muted { color: var(--muted); }
+    .small { font-size: 0.86rem; }
+    .callout {
+      margin: 20px 0;
+      padding: 17px 18px;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      background: var(--accent-soft);
+    }
+    .callout.warm { border-left-color: var(--warm); background: var(--warm-soft); }
+    .callout.good { border-left-color: var(--good); background: var(--good-soft); }
+    .callout strong { display: block; margin-bottom: 4px; }
+    .callout p:last-child { margin-bottom: 0; }
+
+    .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 18px 0; }
+    .card {
+      padding: 19px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+    .card h3, .card h4 { margin-top: 0; }
+    .card p:last-child, .card ul:last-child { margin-bottom: 0; }
+    .card-number {
+      display: inline-grid;
+      place-items: center;
+      width: 31px;
+      height: 31px;
+      margin-bottom: 11px;
+      border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line));
+      border-radius: 8px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font: 800 0.82rem/1 "Cascadia Code", monospace;
+    }
+    .option-table { width: 100%; margin: 18px 0; border-collapse: collapse; }
+    .option-table th, .option-table td { padding: 12px 13px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .option-table th { color: var(--muted); font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .option-table tr:last-child td { border-bottom: 0; }
+    .option-table td:first-child { width: 29%; color: var(--text); font-weight: 750; }
+
+    .checklist {
+      display: grid;
+      gap: 9px;
+      margin: 18px 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: checklist;
+    }
+    .checklist li {
+      counter-increment: checklist;
+      display: grid;
+      grid-template-columns: 33px 1fr;
+      gap: 11px;
+      align-items: start;
+      margin: 0;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface);
+    }
+    .checklist li::before {
+      content: counter(checklist, decimal-leading-zero);
+      color: var(--accent);
+      font: 750 0.76rem/1.8 "Cascadia Code", monospace;
+    }
+
+    .screenshot-figure { margin: 24px 0; }
+    .screenshot-figure.compact { max-width: 520px; }
+    .screenshot-figure.menu-shot { max-width: 330px; }
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 22px 0;
+    }
+    .screenshot-grid .screenshot-figure { margin: 0; }
+    .screenshot-grid .wide { grid-column: 1 / -1; }
+    .screenshot-card {
+      position: relative;
+      overflow: hidden;
+      padding: 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(103, 214, 232, 0.05), transparent 42%),
+        #080b0f;
+      box-shadow: 0 20px 52px rgba(0, 0, 0, 0.24);
+    }
+    .screenshot-button {
+      position: relative;
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      border-radius: 7px;
+      background: transparent;
+      cursor: zoom-in;
+    }
+    .screenshot-button img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      background: #181b1f;
+    }
+    .screenshot-figure.menu-shot .screenshot-button img {
+      width: min(100%, 247px);
+      margin-inline: auto;
+    }
+    .zoom-hint {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      padding: 5px 8px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 999px;
+      background: rgba(5, 9, 12, 0.82);
+      color: #dce9ee;
+      font-size: 0.72rem;
+      font-weight: 750;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity .16s ease, transform .16s ease;
+      pointer-events: none;
+    }
+    .screenshot-button:hover .zoom-hint,
+    .screenshot-button:focus-visible .zoom-hint { opacity: 1; transform: none; }
+    .screenshot-figure figcaption {
+      margin-top: 9px;
+      color: var(--faint);
+      font-size: 0.82rem;
+    }
+    .image-lightbox {
+      width: min(94vw, 1500px);
+      max-width: none;
+      max-height: 92vh;
+      overflow: auto;
+      padding: 48px 18px 18px;
+      border: 1px solid var(--line-strong);
+      border-radius: 16px;
+      background: var(--bg-soft);
+      color: var(--text);
+      box-shadow: 0 30px 100px rgba(0, 0, 0, .56);
+    }
+    .image-lightbox::backdrop { background: rgba(1, 4, 7, 0.82); backdrop-filter: blur(5px); }
+    .image-lightbox img {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      margin-inline: auto;
+      border-radius: 7px;
+      background: #181b1f;
+    }
+    .lightbox-caption { margin: 11px 44px 0 0; color: var(--muted); font-size: .86rem; }
+    .lightbox-close {
+      position: absolute;
+      top: 9px;
+      right: 9px;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface-2);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    details {
+      margin: 10px 0;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface);
+    }
+    summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 15px 17px;
+      cursor: pointer;
+      font-weight: 750;
+      list-style: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; color: var(--accent); font: 500 1.25rem/1 monospace; }
+    details[open] summary::after { content: "−"; }
+    .details-body { padding: 0 17px 17px; color: var(--muted); }
+    .details-body p:last-child, .details-body ul:last-child { margin-bottom: 0; }
+
+    .recipe {
+      position: relative;
+      overflow: hidden;
+    }
+    .recipe::before {
+      content: attr(data-code);
+      position: absolute;
+      right: 14px;
+      top: 10px;
+      color: var(--faint);
+      font: 700 0.7rem/1 "Cascadia Code", monospace;
+      letter-spacing: .08em;
+    }
+    .setting-list { display: grid; gap: 7px; margin-top: 15px; }
+    .setting {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      padding-top: 7px;
+      border-top: 1px solid var(--line);
+      font-size: 0.88rem;
+    }
+    .setting span:first-child { color: var(--muted); }
+    .setting strong { text-align: right; }
+
+    .search-match {
+      border-radius: 3px;
+      background: var(--warm);
+      color: #1c1205;
+      box-shadow: 0 0 0 2px var(--warm-soft);
+    }
+    .no-results {
+      display: none;
+      margin-top: 26px;
+      padding: 18px;
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius);
+      color: var(--muted);
+      text-align: center;
+    }
+    .no-results.visible { display: block; }
+
+    .doc-footer {
+      margin-top: 70px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      color: var(--faint);
+      font-size: 0.82rem;
+    }
+    .doc-footer-inner { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+    @media (max-width: 1020px) {
+      .page-shell { grid-template-columns: 240px minmax(0, 1fr); gap: 24px; }
+    }
+    @media (max-width: 900px) {
+      html { scroll-padding-top: 78px; }
+      .topbar { padding: 9px 12px; gap: 9px; }
+      .brand-title { font-size: 0.78rem; }
+      .brand-meta, .print-button { display: none; }
+      .menu-button { display: inline-grid; }
+      .page-shell { display: block; width: min(100% - 24px, 920px); padding-top: 18px; }
+      .sidebar {
+        position: fixed;
+        z-index: 80;
+        top: 70px;
+        left: 12px;
+        width: min(310px, calc(100vw - 24px));
+        max-height: calc(100vh - 82px);
+        transform: translateX(calc(-100% - 24px));
+        transition: transform .2s ease;
+        background: var(--surface);
+      }
+      body.menu-open .sidebar { transform: none; }
+      body.menu-open::before {
+        content: "";
+        position: fixed;
+        z-index: 70;
+        inset: 70px 0 0;
+        background: rgba(1, 6, 9, 0.46);
+        backdrop-filter: blur(2px);
+      }
+      .workflow-strip { grid-template-columns: repeat(2, 1fr); }
+      .workflow-step:nth-child(2) { border-right: 0; }
+      .workflow-step:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .cards { grid-template-columns: 1fr; }
+      .option-table { display: block; overflow-x: auto; }
+      .screenshot-grid { grid-template-columns: 1fr; }
+      .screenshot-grid .wide { grid-column: auto; }
+      .document-head { border-radius: 15px; }
+      .document-intro { margin-top: 12px; padding: 24px 20px; }
+    }
+    @media (max-width: 450px) {
+      .brand { gap: 7px; }
+      .brand-mark { width: 32px; height: 32px; }
+      .brand-title { display: none; }
+      .lang-button { min-width: 42px; }
+      .document-intro h1 { font-size: 2rem; line-height: 1.08; }
+      .document-intro .lede { margin-top: 17px; font-size: 0.98rem; }
+      .document-intro .meta-row { margin-top: 20px; }
+      .workflow-strip { grid-template-columns: 1fr; }
+      .workflow-step { border-right: 0; border-bottom: 1px solid var(--line); }
+      .workflow-step:last-child { border-bottom: 0; }
+      .screenshot-card { padding: 8px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+    }
+    @media print {
+      :root, html[data-theme="light"] {
+        --bg: #fff; --bg-soft: #fff; --surface: #fff; --surface-2: #f6f6f6; --surface-3: #eee;
+        --text: #111; --muted: #444; --faint: #666; --line: #bbb; --line-strong: #888;
+        --accent: #006e82; --warm: #8a4c00; --good: #086a3d;
+      }
+      body { background: #fff; }
+      .topbar, .sidebar, .workflow-strip { display: none !important; }
+      .page-shell { display: block; width: 100%; padding: 0; }
+      .document-head, .card, details { box-shadow: none; break-inside: avoid; }
+      .manual-section { margin-top: 36px; break-before: auto; }
+      details > .details-body { display: block; }
+      details:not([open]) > .details-body { display: block; }
+      summary::after { display: none; }
+      a { color: #006e82; }
+      .screenshot-figure { break-inside: avoid; }
+      .image-lightbox { display: none !important; }
+      .doc-footer { margin-top: 36px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" id="skipLink" href="#content">Перейти до вмісту</a>
+
+  <header class="topbar">
+    <button class="menu-button" id="menuButton" type="button" aria-label="Відкрити зміст" aria-expanded="false">☰</button>
+    <div class="brand" aria-label="AVA EYE Cinematic">
+      <img class="brand-mark" src="Images/Manual/AVA_EYE_Cinematic_Logo.png" width="128" height="128" alt="" aria-hidden="true">
+      <span class="brand-copy">
+        <span class="brand-title">AVA EYE CINEMATIC</span>
+        <span class="brand-meta">User Manual · UE 5.8 · v1.1.1</span>
+      </span>
+    </div>
+    <div class="top-actions">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button class="lang-button" type="button" data-lang="uk" aria-pressed="true">UA</button>
+        <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="icon-button print-button" id="printButton" type="button" aria-label="Друк або збереження у PDF" title="Друк / PDF">⌑</button>
+      <button class="icon-button" id="themeButton" type="button" aria-label="Змінити тему" title="Змінити тему">◐</button>
+    </div>
+  </header>
+
+  <div class="page-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Зміст">
+      <p class="sidebar-title" id="sidebarTitle">Зміст</p>
+      <div class="search-wrap">
+        <input class="search" id="manualSearch" type="search" autocomplete="off" placeholder="Знайти в посібнику…" aria-label="Пошук у посібнику">
+        <button class="clear-search" id="clearSearch" type="button" aria-label="Очистити пошук">×</button>
+      </div>
+      <nav class="toc" id="tocUk" data-language-toc="uk">
+        <a href="#overview" data-title="Призначення та принцип роботи"><span class="toc-index">01</span><span>Що робить AVA</span></a>
+        <a href="#prepare" data-title="Підготовка проєкту вимоги встановлення sequencer"><span class="toc-index">02</span><span>Перед початком</span></a>
+        <a href="#quick-start" data-title="Швидкий старт перший тест"><span class="toc-index">03</span><span>Швидкий старт</span></a>
+        <a href="#interface" data-title="Інтерфейс панель кнопки параметри"><span class="toc-index">04</span><span>Карта інтерфейсу</span></a>
+        <a href="#free-gaze" data-title="Free Gaze вільний погляд без цілі"><span class="toc-index">05</span><span>Free Gaze</span></a>
+        <a href="#target-gaze" data-title="Target Gaze ціль камера actor tracking"><span class="toc-index">06</span><span>Target Gaze</span></a>
+        <a href="#eye-motion" data-title="Saccades Eye Darts strength pattern"><span class="toc-index">07</span><span>Рух очей</span></a>
+        <a href="#blinks" data-title="Blinks Blink Intelligence Eyelid Follow"><span class="toc-index">08</span><span>Моргання та повіки</span></a>
+        <a href="#head-neck" data-title="Head Neck Idle Coordination Speaker Listener"><span class="toc-index">09</span><span>Голова та шия</span></a>
+        <a href="#generate" data-title="Generate Regenerate New Seed Clear Bake"><span class="toc-index">10</span><span>Генерація</span></a>
+        <a href="#bake" data-title="Bake AVA base controls Body Face Control Rig"><span class="toc-index">11</span><span>Bake у Base Controls</span></a>
+        <a href="#managed" data-title="Managed sections non destructive sequencer"><span class="toc-index">12</span><span>Managed Sections</span></a>
+        <a href="#recipes" data-title="Рецепти налаштування natural calm nervous"><span class="toc-index">13</span><span>Готові рецепти</span></a>
+        <a href="#diagnostics" data-title="Diagnostics debug rig support"><span class="toc-index">14</span><span>Діагностика</span></a>
+        <a href="#troubleshooting" data-title="Помилки troubleshooting not ready"><span class="toc-index">15</span><span>Розв’язання проблем</span></a>
+      </nav>
+      <nav class="toc" id="tocEn" data-language-toc="en" hidden>
+        <a href="#en-overview" data-title="Purpose workflow procedural animation non destructive"><span class="toc-index">01</span><span>What AVA does</span></a>
+        <a href="#en-prepare" data-title="Project preparation requirements installation sequencer"><span class="toc-index">02</span><span>Before you begin</span></a>
+        <a href="#en-quick-start" data-title="Quick start first test"><span class="toc-index">03</span><span>Quick start</span></a>
+        <a href="#en-interface" data-title="Interface panel buttons settings"><span class="toc-index">04</span><span>Panel map</span></a>
+        <a href="#en-free-gaze" data-title="Free Gaze without target"><span class="toc-index">05</span><span>Free Gaze</span></a>
+        <a href="#en-target-gaze" data-title="Target Gaze target camera actor tracking"><span class="toc-index">06</span><span>Target Gaze</span></a>
+        <a href="#en-eye-motion" data-title="Saccades Eye Darts strength pattern"><span class="toc-index">07</span><span>Eye motion</span></a>
+        <a href="#en-blinks" data-title="Blinks Blink Intelligence Eyelid Follow"><span class="toc-index">08</span><span>Blinks and eyelids</span></a>
+        <a href="#en-head-neck" data-title="Head Neck Idle Coordination Speaker Listener"><span class="toc-index">09</span><span>Head and neck</span></a>
+        <a href="#en-generate" data-title="Generate Regenerate New Seed Clear Bake"><span class="toc-index">10</span><span>Generation</span></a>
+        <a href="#en-bake" data-title="Bake AVA base controls Body Face Control Rig"><span class="toc-index">11</span><span>Bake to Base Controls</span></a>
+        <a href="#en-managed" data-title="Managed sections non destructive sequencer"><span class="toc-index">12</span><span>Managed Sections</span></a>
+        <a href="#en-recipes" data-title="Recipes starting points natural calm nervous"><span class="toc-index">13</span><span>Starting points</span></a>
+        <a href="#en-diagnostics" data-title="Diagnostics debug rig support"><span class="toc-index">14</span><span>Diagnostics</span></a>
+        <a href="#en-troubleshooting" data-title="Errors troubleshooting not ready"><span class="toc-index">15</span><span>Troubleshooting</span></a>
+      </nav>
+      <div class="toc-empty" id="tocEmpty">У змісті немає збігів.</div>
+      <p class="sidebar-note" id="sidebarNote">Усі імена персонажів, секвенцій і цілей на ілюстраціях вигадані. Особисті шляхи та дані відсутні.</p>
+    </aside>
+
+    <main id="content" tabindex="-1">
+      <article class="language-panel" data-language-panel="uk">
+        <header class="document-head">
+          <img class="document-hero-image" src="Images/Manual/FAB_Thumbnail_AVA_EYE_Cinematic_1920x1080.jpg" width="1920" height="1080" alt="AVA EYE Cinematic — анімація очей MetaHuman для Sequencer">
+        </header>
+        <div class="document-intro">
+            <p class="eyebrow">Посібник користувача · українська</p>
+            <h1>Живий погляд у Sequencer — від першого кліка до фінального кадру</h1>
+            <p class="lede">AVA EYE Cinematic створює керовану процедурну анімацію очей, моргань і голови для MetaHuman, не руйнуючи початкову facial animation.</p>
+            <div class="meta-row">
+              <span class="meta-pill accent">Version 1.1.1</span>
+              <span class="meta-pill">Unreal Engine 5.8.x</span>
+              <span class="meta-pill">Windows 64-bit</span>
+              <span class="meta-pill">Editor / Sequencer</span>
+              <span class="meta-pill">Release Manual</span>
+            </div>
+        </div>
+
+        <div class="workflow-strip" aria-label="Основний процес">
+          <div class="workflow-step" data-step="01"><strong>Відкрийте</strong><span>Level Sequence</span></div>
+          <div class="workflow-step" data-step="02"><strong>Виберіть</strong><span>MetaHuman і діапазон</span></div>
+          <div class="workflow-step" data-step="03"><strong>Налаштуйте</strong><span>погляд і рух</span></div>
+          <div class="workflow-step" data-step="04"><strong>Завершіть</strong><span>Generate → перевірка → Bake</span></div>
+        </div>
+
+        <section class="manual-section" id="overview" data-searchable="що робить призначення процедурна анімація non destructive">
+          <p class="section-kicker">01 / ОСНОВА</p>
+          <h2>Що робить AVA EYE Cinematic</h2>
+          <p>Плагін додає поверх наявної анімації керовану eye-performance систему: основні саккади, дрібні Eye Darts, моргання, реакцію повік, мікродеталі обличчя та рух голови/шиї. Робота виконується всередині Level Sequencer на Control Rig вибраного MetaHuman.</p>
+
+          <div class="cards">
+            <div class="card">
+              <span class="card-number">A</span>
+              <h3>Free Gaze</h3>
+              <p>Вільний процедурний погляд без об’єкта-цілі. Saccades та Eye Darts працюють незалежно одне від одного й не потребують увімкненого Target Gaze.</p>
+            </div>
+            <div class="card">
+              <span class="card-number">B</span>
+              <h3>Target Gaze</h3>
+              <p>Точний погляд на TargetPoint, Actor, камеру або Sequencer spawnable. Ціль можна закріпити біля голови або анімувати у світовому просторі.</p>
+            </div>
+          </div>
+
+          <div class="callout good">
+            <strong>До фінального Bake початкова анімація залишається недоторканою</strong>
+            <p>AVA створює окремі секції з позначкою <code>[Managed]</code>. Команда <strong>Clear</strong> видаляє лише результат AVA та повертає початковий стан секвенції. <strong>BAKE AVA TO BASE CONTROLS</strong> — окремий фінальний крок, що об’єднує поточні шари в базові шари Control Rig.</p>
+          </div>
+        </section>
+
+        <section class="manual-section" id="prepare" data-searchable="підготовка встановлення plugin dependencies control rig python">
+          <p class="section-kicker">02 / ПІДГОТОВКА</p>
+          <h2>Перед початком</h2>
+
+          <h3>Вимоги</h3>
+          <ul>
+            <li>Unreal Engine 5.8.x на Windows 64-bit.</li>
+            <li>Плагіни Unreal <strong>Python Editor Script Plugin</strong>, <strong>Control Rig</strong> і <strong>Sequencer Scripting</strong>.</li>
+            <li>Level Sequence з MetaHuman Face Control Rig.</li>
+            <li>Для Head / Neck — MetaHuman Body Control Rig або сумісний Unreal FK Control Rig із bone-controls <code>head</code> і <code>neck_01</code>.</li>
+          </ul>
+
+          <h3>Встановлення</h3>
+          <ol class="checklist">
+            <li><span>Закрийте Unreal Editor перед заміною або оновленням версії плагіна.</span></li>
+            <li><span>Скопіюйте папку <code>AVA_EyeAnimator</code> до <code>&lt;Project&gt;/Plugins/</code>.</span></li>
+            <li><span>Відкрийте проєкт і дозвольте Unreal зібрати Editor-модуль, якщо з’явиться відповідний запит.</span></li>
+            <li><span>Відкрийте <strong>Tools → AVA EYE Cinematic</strong> і закріпіть панель у зручному місці інтерфейсу.</span></li>
+          </ol>
+
+          <figure class="screenshot-figure menu-shot">
+            <div class="screenshot-card">
+              <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_Menu.png" data-caption="Команда запуску AVA EYE Cinematic у меню Tools." aria-label="Збільшити знімок меню Tools">
+                <img src="Images/Manual/AVA_EYE_Cinematic_Menu.png" width="247" height="977" alt="Меню Tools в Unreal Editor із командою AVA EYE Cinematic" loading="lazy" decoding="async">
+                <span class="zoom-hint" aria-hidden="true">Збільшити ↗</span>
+              </button>
+            </div>
+            <figcaption>Панель відкривається через <strong>Tools → AVA EYE Cinematic</strong>. Натисніть зображення, щоб переглянути його в повному розмірі.</figcaption>
+          </figure>
+
+          <div class="callout warm">
+            <strong>Якщо у вас є лише Animation Sequence</strong>
+            <p>Спочатку додайте її на Face track MetaHuman у Sequencer і підготуйте або запечіть на MetaHuman Face Control Rig. AVA працює з Control Rig у Sequencer і не змінює Animation Sequence asset безпосередньо.</p>
+          </div>
+        </section>
+
+        <section class="manual-section" id="quick-start" data-searchable="quick start natural generate saccades darts blink">
+          <p class="section-kicker">03 / ПЕРШИЙ РЕЗУЛЬТАТ</p>
+          <h2>Швидкий старт: тест на 5–10 секунд</h2>
+          <ol class="checklist">
+            <li><span>Відкрийте потрібну Level Sequence і встановіть Playback Range на короткий фрагмент.</span></li>
+            <li><span>У панелі <strong>Character</strong> натисніть <strong>Refresh</strong> і виберіть MetaHuman.</span></li>
+            <li><span>У <strong>Shot</strong> виберіть <strong>Natural</strong>, потім натисніть <strong>Playback</strong>.</span></li>
+            <li><span>Залиште <strong>Target Gaze вимкненим</strong>. Увімкніть Saccades, Eye Darts, Blinks, Blink Intelligence та Eyelid Follow.</span></li>
+            <li><span>Натисніть <strong>GENERATE AVA</strong> і відтворіть фрагмент у реальному часі.</span></li>
+            <li><span>Змініть Seed або натисніть <strong>New Seed</strong>, щоб швидко отримати інший варіант.</span></li>
+            <li><span>На тестовій копії натисніть <strong>Clear</strong>, щоб переконатися: початкова facial animation повністю відновлюється.</span></li>
+            <li><span>Після затвердження результату знову виконайте Generate/Regenerate, збережіть копію Level Sequence і натисніть <strong>BAKE AVA TO BASE CONTROLS</strong>.</span></li>
+          </ol>
+          <div class="callout">
+            <strong>Рекомендований принцип налаштування</strong>
+            <p>Спочатку оцінюйте лише очі. Потім додайте Blinks/Eyelid Follow і тільки після цього — Head / Neck. Так легше зрозуміти внесок кожного шару.</p>
+          </div>
+        </section>
+
+        <section class="manual-section" id="interface" data-searchable="карта інтерфейсу character shot gaze motion generate">
+          <p class="section-kicker">04 / ІНТЕРФЕЙС</p>
+          <h2>Карта панелі</h2>
+          <p>Панель читається згори донизу: вибір персонажа та шоту, режим погляду, рух очей, моргання й обличчя, голова/шия, генерація, фінальний Bake і діагностика. Натисніть будь-який скриншот у посібнику, щоб відкрити його в окремому вікні перегляду.</p>
+
+          <div class="screenshot-grid">
+            <figure class="screenshot-figure">
+              <div class="screenshot-card">
+                <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_Panel_Sanitized_v111.png" data-caption="Повна панель AVA EYE Cinematic 1.1.1. Службовий рядок Binding приховано з міркувань конфіденційності." aria-label="Збільшити повний знімок панелі AVA EYE Cinematic 1.1.1">
+                  <img src="Images/Manual/AVA_EYE_Cinematic_Panel_Sanitized_v111.png" width="763" height="2061" alt="Повна панель AVA EYE Cinematic 1.1.1 із прихованим рядком Binding" loading="lazy" decoding="async">
+                  <span class="zoom-hint" aria-hidden="true">Збільшити ↗</span>
+                </button>
+              </div>
+              <figcaption>Оновлена панель 1.1.1 із кнопкою Bake. Службовий рядок <code>Binding</code> приховано кольором панелі.</figcaption>
+            </figure>
+
+            <figure class="screenshot-figure">
+              <div class="screenshot-card">
+                <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_Character_Shot.png" data-caption="Розділи Character і Shot: вибір персонажа, пресету, Seed і діапазону." aria-label="Збільшити знімок розділів Character і Shot">
+                  <img src="Images/Manual/AVA_EYE_Cinematic_Character_Shot.png" width="439" height="193" alt="Розділи Character і Shot у панелі AVA EYE Cinematic" loading="lazy" decoding="async">
+                  <span class="zoom-hint" aria-hidden="true">Збільшити ↗</span>
+                </button>
+              </div>
+              <figcaption><strong>Character</strong> вибирає MetaHuman; <strong>Shot</strong> задає Preset, Seed і діапазон генерації.</figcaption>
+            </figure>
+          </div>
+
+          <table class="option-table">
+            <thead><tr><th>Розділ</th><th>Призначення</th></tr></thead>
+            <tbody>
+              <tr><td>Character</td><td>Вибір MetaHuman за унікальним Sequencer Face Binding. Це особливо важливо, якщо в кадрі кілька персонажів.</td></tr>
+              <tr><td>Shot</td><td>Характер руху, повторюваний Seed і діапазон генерації.</td></tr>
+              <tr><td>Gaze</td><td>Вибір Free Gaze або Target Gaze та поведінкової ролі Speaker/Listener.</td></tr>
+              <tr><td>Eye Motion</td><td>Основні фіксації Saccades і невеликі згруповані Eye Darts.</td></tr>
+              <tr><td>Blinks &amp; Face</td><td>Моргання, реакція повік і необов’язкові мікродеталі обличчя.</td></tr>
+              <tr><td>Head / Neck</td><td>Процедурний idle і координація голови з поглядом на світову ціль.</td></tr>
+              <tr><td>Generate</td><td>Створення, безпечна повторна генерація, новий Seed, видалення AVA-шарів і фінальний Bake у базові контролери.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="manual-section" id="free-gaze" data-searchable="free gaze target off saccades eye darts head relative">
+          <p class="section-kicker">05 / FREE GAZE</p>
+          <h2>Вільний процедурний погляд</h2>
+          <p>Free Gaze вмикається автоматично, коли <strong>Target Gaze вимкнено</strong>. AVA формує нейтральну точку перед головою та будує рух очей навколо неї.</p>
+
+          <figure class="screenshot-figure compact">
+            <div class="screenshot-card">
+              <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_Free_Gaze.png" data-caption="Free Gaze: Target Gaze вимкнено, а Saccades та Eye Darts доступні незалежно." aria-label="Збільшити знімок Free Gaze">
+                <img src="Images/Manual/AVA_EYE_Cinematic_Free_Gaze.png" width="439" height="204" alt="Налаштування Free Gaze з вимкненим Target Gaze" loading="lazy" decoding="async">
+                <span class="zoom-hint" aria-hidden="true">Збільшити ↗</span>
+              </button>
+            </div>
+            <figcaption>Free Gaze не потребує цілі: Saccades та Eye Darts продовжують працювати як самостійні функції.</figcaption>
+          </figure>
+
+          <div class="callout good">
+            <strong>В актуальному білді</strong>
+            <p>Saccades та Eye Darts повністю незалежні від Target Gaze. Можна ввімкнути лише Saccades, лише Eye Darts, обидва ефекти або вимкнути обидва.</p>
+          </div>
+
+          <h3>Коли використовувати</h3>
+          <ul>
+            <li>Персонаж не дивиться на точно заданий об’єкт.</li>
+            <li>Потрібна природна жива активність очей поверх facial mocap.</li>
+            <li>Ви хочете швидко знайти відповідний варіант за допомогою Seed.</li>
+            <li>Кадр допускає художню, а не геометрично точну точку уваги.</li>
+          </ul>
+
+          <h3>Мінімальне налаштування</h3>
+          <p><strong>Natural → Saccades ON → Eye Darts ON → Strength 1.00× → Dart Strength 2.00×.</strong> Для спокійного крупного плану зменшуйте Strength, а не вимикайте весь шар одразу.</p>
+        </section>
+
+        <section class="manual-section" id="target-gaze" data-searchable="target gaze create pick selected actor camera world head anchored animated tracking">
+          <p class="section-kicker">06 / TARGET GAZE</p>
+          <h2>Точний погляд на об’єкт</h2>
+          <p>Увімкніть <strong>Target Gaze</strong>, коли точку уваги має визначити художник: предмет, камера, інший Actor або створений AVA TargetPoint.</p>
+
+          <figure class="screenshot-figure compact">
+            <div class="screenshot-card">
+              <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_Target_Gaze.png" data-caption="Target Gaze: вибір, створення, попередній перегляд і додавання цілі до Sequencer." aria-label="Збільшити знімок Target Gaze">
+                <img src="Images/Manual/AVA_EYE_Cinematic_Target_Gaze.png" width="439" height="168" alt="Налаштування Target Gaze у панелі AVA EYE Cinematic" loading="lazy" decoding="async">
+                <span class="zoom-hint" aria-hidden="true">Збільшити ↗</span>
+              </button>
+            </div>
+            <figcaption>Після ввімкнення Target Gaze виберіть наявну ціль або створіть AVA Gaze Target.</figcaption>
+          </figure>
+
+          <div class="cards">
+            <div class="card">
+              <span class="card-number">01</span>
+              <h3>Create</h3>
+              <p>Створює спеціальну AVA Gaze Target для вибраного MetaHuman. Зручно, коли в сцені ще немає відповідного об’єкта.</p>
+            </div>
+            <div class="card">
+              <span class="card-number">02</span>
+              <h3>Pick Selected</h3>
+              <p>Використовує вибраний Actor, камеру або обчислений Sequencer spawnable як точку погляду.</p>
+            </div>
+            <div class="card">
+              <span class="card-number">03</span>
+              <h3>Preview / Select</h3>
+              <p><strong>Preview</strong> перевіряє напрямок, <strong>Select</strong> знаходить поточну ціль в Editor.</p>
+            </div>
+            <div class="card">
+              <span class="card-number">04</span>
+              <h3>Add to Sequencer</h3>
+              <p>Додає ціль до Level Sequence, щоб її положення можна було ключувати й анімувати.</p>
+            </div>
+          </div>
+
+          <h3>Attach to Head або Detach to World</h3>
+          <table class="option-table">
+            <thead><tr><th>Режим</th><th>Поведінка</th><th>Коли вибирати</th></tr></thead>
+            <tbody>
+              <tr><td>Attach to Head</td><td>Ціль рухається разом із головою персонажа.</td><td>Потрібен локальний орієнтир або стабільна відносна поза.</td></tr>
+              <tr><td>Detach to World</td><td>Ціль стає незалежною у світовому просторі.</td><td>Персонаж має утримувати погляд на об’єкті під час руху голови або тіла.</td></tr>
+            </tbody>
+          </table>
+
+          <figure class="screenshot-figure">
+            <div class="screenshot-card">
+              <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_World_Target_Sequencer.png" data-caption="World Target у Level Sequencer: положення цілі можна анімувати ключами." aria-label="Збільшити знімок World Target у Sequencer">
+                <img src="Images/Manual/AVA_EYE_Cinematic_World_Target_Sequencer.png" width="714" height="290" alt="AVA Gaze Target у світовому просторі та його Transform track у Sequencer" loading="lazy" decoding="async">
+                <span class="zoom-hint" aria-hidden="true">Збільшити ↗</span>
+              </button>
+            </div>
+            <figcaption>World Target, доданий до Level Sequencer: його Transform можна анімувати звичайними ключами.</figcaption>
+          </figure>
+
+          <h3>Animated Tracking</h3>
+          <p>Вмикайте для рухомої цілі. AVA семплує її положення в межах діапазону, утримує world-lock відносно руху персонажа та застосовує Smooth Pursuit із коригувальними catch-up saccades лише до фактичного руху цілі.</p>
+
+          <figure class="screenshot-figure">
+            <div class="screenshot-card">
+              <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_Gaze_Debug.png" data-caption="Show Gaze Debug показує лінії та точки, за якими зручно перевіряти напрямок погляду." aria-label="Збільшити знімок Gaze Debug">
+                <img src="Images/Manual/AVA_EYE_Cinematic_Gaze_Debug.png" width="790" height="505" alt="Налагоджувальна візуалізація напрямку погляду в Unreal Editor" loading="lazy" decoding="async">
+                <span class="zoom-hint" aria-hidden="true">Збільшити ↗</span>
+              </button>
+            </div>
+            <figcaption><strong>Show Gaze Debug</strong> допомагає візуально перевірити напрямок, ціль і поведінку трекінгу.</figcaption>
+          </figure>
+
+          <div class="callout warm">
+            <strong>Для Head / Eye Coordination потрібна World Target</strong>
+            <p>Якщо ви хочете, щоб голова наздоганяла очі, від’єднайте AVA target у World або виберіть незалежний Actor чи камеру.</p>
+          </div>
+        </section>
+
+        <section class="manual-section" id="eye-motion" data-searchable="saccades eye darts strength target area pattern random scanning tracking search">
+          <p class="section-kicker">07 / EYE MOTION</p>
+          <h2>Saccades та Eye Darts</h2>
+
+          <h3>Saccades</h3>
+          <p>Основні зміни фіксації — помітні, але швидкі переміщення очей між точками уваги.</p>
+          <table class="option-table">
+            <tbody>
+              <tr><td>Strength</td><td>Амплітуда основних саккад: <strong>0.25×–1.50×</strong>. Починайте з 1.00×.</td></tr>
+              <tr><td>Target Area</td><td>Розкид фіксацій навколо Target Gaze: <strong>0.00–0.60</strong>. Параметр з’являється лише за ввімкненої цілі.</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Eye Darts</h3>
+          <p>Дрібні згруповані re-fixation рухи всередині більшої поведінки погляду. У початковій термінології AVA це Advanced Step Saccades.</p>
+          <table class="option-table">
+            <tbody>
+              <tr><td>Pattern</td><td><strong>Random</strong>, <strong>Scanning</strong>, <strong>Tracking</strong> або <strong>Search</strong>.</td></tr>
+              <tr><td>Dart Strength</td><td>Художня сила Eye Darts: <strong>2.00×–8.00×</strong>. Для реалістичного close-up починайте з мінімуму.</td></tr>
+            </tbody>
+          </table>
+
+          <div class="callout">
+            <strong>Біомеханічно обґрунтований таймінг саккад</strong>
+            <p>AVA розраховує тривалість саккади за моделлю Main Sequence: зі збільшенням амплітуди руху відповідно зростає його тривалість. Наукова основа — дослідження рухів людського ока Bahill, Clark &amp; Stark (1975), розвинене у Bahill &amp; Stark (1979).</p>
+          </div>
+
+          <details>
+            <summary>Чим відрізняються patterns Eye Darts?</summary>
+            <div class="details-body">
+              <ul>
+                <li><strong>Random</strong> — універсальний нерегулярний рисунок.</li>
+                <li><strong>Scanning</strong> — виразніше сканування області.</li>
+                <li><strong>Tracking</strong> — стримані коригування, придатні для утримання уваги.</li>
+                <li><strong>Search</strong> — активніший пошуковий рисунок.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary>Що робить Seed?</summary>
+            <div class="details-body">
+              <p>Однакові налаштування та однаковий Seed дають повторюваний результат. Кнопки <strong>−1</strong> і <strong>+1</strong> зручні для послідовного перебору варіантів; <strong>Random</strong> вибирає новий seed.</p>
+            </div>
+          </details>
+        </section>
+
+        <section class="manual-section" id="blinks" data-searchable="blinks blink intelligence smart replacement eyelid follow squint brow">
+          <p class="section-kicker">08 / BLINKS &amp; FACE</p>
+          <h2>Моргання, повіки та мікродеталі</h2>
+
+          <figure class="screenshot-figure compact">
+            <div class="screenshot-card">
+              <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_Blink_Face.png" data-caption="Blinks & Face: процедурні моргання, Blink Intelligence, Eyelid Follow і Facial Micro Detail." aria-label="Збільшити знімок Blinks and Face">
+                <img src="Images/Manual/AVA_EYE_Cinematic_Blink_Face.png" width="427" height="148" alt="Розділ Blinks and Face у панелі AVA EYE Cinematic" loading="lazy" decoding="async">
+                <span class="zoom-hint" aria-hidden="true">Збільшити ↗</span>
+              </button>
+            </div>
+            <figcaption>Основні моргання та реакція повік вмикаються окремо від необов’язкових Squint Micro і Brow Micro.</figcaption>
+          </figure>
+
+          <table class="option-table">
+            <tbody>
+              <tr><td>Blinks</td><td>Створює процедурні моргання у вибраному діапазоні.</td></tr>
+              <tr><td>Blink Intelligence</td><td>Розміщує моргання з урахуванням зміни погляду та re-engagement, а також безпечно замінює знайдені двосторонні mocap blinks.</td></tr>
+              <tr><td>Eyelid Follow</td><td>Додає реакцію повік, пов’язану з напрямком погляду.</td></tr>
+              <tr><td>Squint Micro</td><td>Необов’язкова легка мікроваріація squint.</td></tr>
+              <tr><td>Brow Micro</td><td>Необов’язкова мікроваріація брів.</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Smart Blink Replacement</h3>
+          <p>Якщо AVA знаходить надійні двосторонні події на <code>CTRL_L_eye_blink</code> і <code>CTRL_R_eye_blink</code>, їх timing використовується як anchor. Нова крива записується в окрему абсолютну секцію <code>AVA Smart Blink Override [Managed]</code>. Початкова facial section не редагується.</p>
+          <p>Якщо відповідних подій немає, плагін автоматично використовує звичайний procedural Smart Blink.</p>
+        </section>
+
+        <section class="manual-section" id="head-neck" data-searchable="head neck idle amplitude coordination follow speaker listener performance facial mocap">
+          <p class="section-kicker">09 / HEAD &amp; NECK</p>
+          <h2>Рух голови та шиї</h2>
+
+          <figure class="screenshot-figure compact">
+            <div class="screenshot-card">
+              <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_Head_Neck.png" data-caption="Head / Neck: амплітуда idle, координація голови й очей і сила Head Follow." aria-label="Збільшити знімок Head and Neck">
+                <img src="Images/Manual/AVA_EYE_Cinematic_Head_Neck.png" width="427" height="113" alt="Розділ Head and Neck у панелі AVA EYE Cinematic" loading="lazy" decoding="async">
+                <span class="zoom-hint" aria-hidden="true">Збільшити ↗</span>
+              </button>
+            </div>
+            <figcaption>Head / Neck Idle і Head / Eye Coordination — незалежні перемикачі з окремим налаштуванням сили.</figcaption>
+          </figure>
+
+          <h3>Head / Neck Idle</h3>
+          <p>Додає тонкий детермінований posture motion в окрему additive-секцію. <strong>Idle Amplitude</strong> працює в діапазоні <strong>0.10×–10.00×</strong>; 1.00× — природна база, великі значення навмисно стають виразними.</p>
+          <p>Якщо доступні head і neck controls, рух розподіляється за ієрархією. Якщо ні — AVA використовує head-only fallback. За відсутності окремого Body Control Rig підтримується сумісний Unreal FK Control Rig.</p>
+
+          <h3>Behavior: Listener / Speaker</h3>
+          <div class="cards">
+            <div class="card">
+              <h4>Listener</h4>
+              <p>Стабільніший контакт і короткі природні відведення погляду. За ввімкненого Head / Neck Idle система шукає виразні facial-reaction події та додає м’які acknowledgement nods лише за наявності надійного сигналу.</p>
+            </div>
+            <div class="card">
+              <h4>Speaker</h4>
+              <p>Частіші відведення та автоматичне повернення уваги. Аналізує jaw/mouth/lip activity і додає плавні акценти голови всередині фрагментів мовлення.</p>
+            </div>
+          </div>
+
+          <h3>Head / Eye Coordination</h3>
+          <p>Доступна за ввімкненого Target Gaze. Очі першими захоплюють світову ціль, після короткої затримки підключається голова, а контрротація очей утримує точку уваги.</p>
+          <table class="option-table">
+            <tbody>
+              <tr><td>Head Follow</td><td><strong>25%–100%</strong>. Визначає силу, з якою голова наздоганяє World Target.</td></tr>
+              <tr><td>Response</td><td><strong>50–300 ms</strong>. Менше значення — голова реагує швидше; більше — очі довше ведуть рух.</td></tr>
+              <tr><td>Catch-up</td><td><strong>0.05–0.50</strong>. Поріг помилки, після якого голова прискорює наздоганяльний рух.</td></tr>
+            </tbody>
+          </table>
+          <div class="callout">
+            <strong>Аналіз facial mocap виконується в режимі read-only</strong>
+            <p>AVA тимчасово вилучає власні managed Face-секції з аналізу, тому Regenerate не сприймає попередній результат AVA як нову початкову performance.</p>
+          </div>
+        </section>
+
+        <section class="manual-section" id="generate" data-searchable="generate regenerate new seed clear bake ready warning">
+          <p class="section-kicker">10 / OUTPUT</p>
+          <h2>Generate, Regenerate, New Seed і Clear</h2>
+
+          <figure class="screenshot-figure compact">
+            <div class="screenshot-card">
+              <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_Generate.png" data-caption="Generate у версії 1.1.1: створення, повторна генерація, новий Seed, очищення та Bake у базові контролери." aria-label="Збільшити оновлений розділ Generate">
+                <img src="Images/Manual/AVA_EYE_Cinematic_Generate.png" width="486" height="150" alt="Оновлений розділ Generate із кнопкою Bake AVA to Base Controls" loading="lazy" decoding="async">
+                <span class="zoom-hint" aria-hidden="true">Збільшити ↗</span>
+              </button>
+            </div>
+            <figcaption>У 1.1.1 під командами Generate додано кнопку <strong>BAKE AVA TO BASE CONTROLS</strong>. Рядок Viewport target показує поточну ціль і режим координат.</figcaption>
+          </figure>
+
+          <table class="option-table">
+            <tbody>
+              <tr><td>GENERATE AVA</td><td>Створює AVA animation для вибраного Character і діапазону. Кнопка активна лише за статусу READY.</td></tr>
+              <tr><td>Regenerate</td><td>Безпечно замінює наявний AVA-managed результат із поточними налаштуваннями та тим самим Seed.</td></tr>
+              <tr><td>New Seed</td><td>Створює новий процедурний варіант без ручного введення seed.</td></tr>
+              <tr><td>Clear</td><td>Видаляє лише AVA-managed секції вибраного персонажа. Source facial/body animation не видаляється.</td></tr>
+              <tr><td>BAKE AVA TO BASE CONTROLS</td><td>Після підтвердження запускає стандартний Unreal Bake спочатку для Body, а потім для Face. Докладний порядок наведено в <a href="#bake">наступному розділі</a>.</td></tr>
+            </tbody>
+          </table>
+          <div class="callout warm">
+            <strong>Перед довгим шотом</strong>
+            <p>Спочатку протестуйте 5–10 секунд. Після затвердження характеру руху розширте Playback Range і виконайте фінальний Regenerate. Не запускайте Bake, поки хочете вільно порівнювати, очищати або переналаштовувати окремі AVA Managed Sections.</p>
+          </div>
+        </section>
+
+        <section class="manual-section" id="bake" data-searchable="bake ava base controls body face metahuman control rig final">
+          <p class="section-kicker">11 / FINALIZATION</p>
+          <h2>Bake AVA у базові контролери</h2>
+          <p>Нова команда версії <strong>1.1.1</strong> автоматизує стандартний Sequencer workflow для вибраного MetaHuman. Вона послідовно виконує <strong>Body → Bake To Control Rig → <code>MetaHuman_ControlRig</code></strong>, а потім <strong>Face → Bake To Control Rig → <code>Face_ControlBoard_CtrlRig</code></strong>.</p>
+
+          <ol class="checklist">
+            <li><span>Повністю затвердьте результат AVA і переконайтеся, що в панелі вибрано потрібний Character.</span></li>
+            <li><span>Збережіть Level Sequence або створіть її копію: Bake змінює структуру шарів Control Rig.</span></li>
+            <li><span>Натисніть <strong>BAKE AVA TO BASE CONTROLS</strong> і підтвердьте дію в діалозі <strong>Bake AVA to Base Controls</strong>.</span></li>
+            <li><span>Дочекайтеся завершення обох етапів — спочатку Body, потім Face — і перевірте результат відтворенням.</span></li>
+            <li><span>У Sequencer перевірте, що на Body і Face залишилося по одній запеченій базовій Control Rig-секції.</span></li>
+          </ol>
+
+          <table class="option-table">
+            <thead><tr><th>Етап</th><th>Що робить AVA</th></tr></thead>
+            <tbody>
+              <tr><td>Body</td><td>Бере точний Body binding вибраного персонажа та запікає поточну анімацію в <code>MetaHuman_ControlRig</code>.</td></tr>
+              <tr><td>Face</td><td>Бере точний Face binding того самого персонажа та запікає поточну анімацію в <code>Face_ControlBoard_CtrlRig</code>.</td></tr>
+              <tr><td>Результат</td><td>Unreal замінює поточні шари Control Rig кожного слота однією запеченою базовою секцією.</td></tr>
+            </tbody>
+          </table>
+
+          <div class="callout warm">
+            <strong>Bake — це фіналізація, а не альтернатива Clear</strong>
+            <p><strong>Clear</strong> видаляє окремі AVA Managed Sections і показує недоторкане джерело. <strong>Bake</strong> об’єднує поточний результат у базові шари Control Rig для Body і Face. Перед Bake збережіть окрему редаговану версію Level Sequence.</p>
+          </div>
+        </section>
+
+        <section class="manual-section" id="managed" data-searchable="managed sections sequencer clear additive absolute non destructive">
+          <p class="section-kicker">12 / NON-DESTRUCTIVE</p>
+          <h2>Що з’являється в Sequencer</h2>
+          <p>До виконання Bake конкретний набір залежить від увімкнених функцій. Назви managed-секцій дають змогу швидко відокремити результат AVA від початкової анімації.</p>
+
+          <figure class="screenshot-figure">
+            <div class="screenshot-card">
+              <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_Generation.png" data-caption="Результат генерації AVA у Level Sequencer з окремими керованими секціями." aria-label="Збільшити знімок результату генерації у Sequencer">
+                <img src="Images/Manual/AVA_EYE_Cinematic_Generation.png" width="718" height="551" alt="AVA-managed секції після генерації у Level Sequencer" loading="lazy" decoding="async">
+                <span class="zoom-hint" aria-hidden="true">Збільшити ↗</span>
+              </button>
+            </div>
+            <figcaption>AVA додає результат окремими секціями у Level Sequencer, не перезаписуючи початкову анімацію.</figcaption>
+          </figure>
+
+          <table class="option-table">
+            <thead><tr><th>Секція</th><th>Вміст</th></tr></thead>
+            <tbody>
+              <tr><td><code>AVA EYE Cinematic [Managed]</code></td><td>Основний рух очей і facial micro detail.</td></tr>
+              <tr><td><code>AVA Smart Blink Override [Managed]</code></td><td>Абсолютна blink-секція під час заміни початкових mocap blinks.</td></tr>
+              <tr><td><code>AVA Target Gaze Override [Managed]</code></td><td>Керування точним цільовим поглядом там, де застосовується override-архітектура.</td></tr>
+              <tr><td><code>AVA Head / Neck Idle [Managed]</code></td><td>Незалежний additive idle голови та шиї.</td></tr>
+              <tr><td><code>AVA Head Follow [Managed]</code></td><td>Additive head-follow результат для Head / Eye Coordination.</td></tr>
+            </tbody>
+          </table>
+          <p>Щоб порівняти результат з оригіналом до Bake, використовуйте <strong>Clear</strong>, Undo або тимчасово вимикайте managed section у Sequencer. Після <strong>BAKE AVA TO BASE CONTROLS</strong> ця багатошарова структура замінюється однією базовою Control Rig-секцією на Body і однією на Face.</p>
+        </section>
+
+        <section class="manual-section" id="recipes" data-searchable="рецепти налаштування natural calm nervous closeup dialogue target">
+          <p class="section-kicker">13 / STARTING POINTS</p>
+          <h2>Готові рецепти</h2>
+          <p class="muted">Це стартові точки, а не суворі правила. Спочатку доберіть Seed, потім відкоригуйте амплітуду.</p>
+
+          <div class="cards">
+            <div class="card recipe" data-code="FREE-01">
+              <h3>Природний close-up</h3>
+              <p>Ненав’язлива жива активність поверх наявної facial performance.</p>
+              <div class="setting-list">
+                <div class="setting"><span>Preset</span><strong>Natural</strong></div>
+                <div class="setting"><span>Target Gaze</span><strong>OFF</strong></div>
+                <div class="setting"><span>Saccades</span><strong>ON · 0.75–1.00×</strong></div>
+                <div class="setting"><span>Eye Darts</span><strong>Random · 2.00×</strong></div>
+                <div class="setting"><span>Eyelid Follow</span><strong>ON</strong></div>
+              </div>
+            </div>
+            <div class="card recipe" data-code="TARGET-01">
+              <h3>Точний погляд у камеру</h3>
+              <p>Фіксація на CineCameraActor із невеликим живим розкидом.</p>
+              <div class="setting-list">
+                <div class="setting"><span>Preset</span><strong>Calm</strong></div>
+                <div class="setting"><span>Target</span><strong>Pick Selected Camera</strong></div>
+                <div class="setting"><span>Target Area</span><strong>0.05–0.12</strong></div>
+                <div class="setting"><span>Saccades</span><strong>ON · 0.50–0.75×</strong></div>
+                <div class="setting"><span>Animated Tracking</span><strong>якщо камера рухається</strong></div>
+              </div>
+            </div>
+            <div class="card recipe" data-code="ROLE-01">
+              <h3>Уважний слухач</h3>
+              <p>Стійкий контакт і м’яка реакція голови на facial performance.</p>
+              <div class="setting-list">
+                <div class="setting"><span>Behavior</span><strong>Listener</strong></div>
+                <div class="setting"><span>Head / Neck Idle</span><strong>ON · 0.60–1.00×</strong></div>
+                <div class="setting"><span>Blink Intelligence</span><strong>ON</strong></div>
+                <div class="setting"><span>Facial Micro</span><strong>за потреби</strong></div>
+              </div>
+            </div>
+            <div class="card recipe" data-code="ROLE-02">
+              <h3>Нервовий пошук</h3>
+              <p>Активніші фіксації та виразні короткі re-fixation рухи.</p>
+              <div class="setting-list">
+                <div class="setting"><span>Preset</span><strong>Nervous</strong></div>
+                <div class="setting"><span>Saccades</span><strong>ON · 1.00–1.25×</strong></div>
+                <div class="setting"><span>Eye Darts</span><strong>Search · 2.5–4.0×</strong></div>
+                <div class="setting"><span>Head / Neck Idle</span><strong>ON · до 1.25×</strong></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="manual-section" id="diagnostics" data-searchable="diagnostics show gaze debug inspect rig facial layer check output log">
+          <p class="section-kicker">14 / SUPPORT</p>
+          <h2>Діагностика</h2>
+          <p>Розгорніть <strong>Diagnostics | Support / Rig Info</strong>, коли потрібно перевірити вибраний Face Rig, Body Rig, Binding або точність Target Gaze.</p>
+          <table class="option-table">
+            <tbody>
+              <tr><td>Show Gaze Debug</td><td>Показує у viewport: cyan — ray на World Target, green — фактичний напрямок eye bones +Z, red — target point, yellow — camera component за offset від actor root.</td></tr>
+              <tr><td>Gaze Error</td><td>Оцінка кутового розходження фактичного погляду та цілі.</td></tr>
+              <tr><td>Inspect Rig</td><td>Виводить технічну інформацію про знайдені Control Rigs.</td></tr>
+              <tr><td>Inspect Facial</td><td>Перевіряє доступну facial animation для аналізу та blink replacement.</td></tr>
+              <tr><td>Layer Check</td><td>Перевіряє AVA-managed секції та їхній стан.</td></tr>
+            </tbody>
+          </table>
+          <p class="small muted">Короткі повідомлення показуються художнику в панелі. Повні технічні деталі та Python traceback доступні в Unreal Output Log.</p>
+        </section>
+
+        <section class="manual-section" id="troubleshooting" data-searchable="помилка not ready target blocked head eye warning blinks doubled clear bake body face control rig support неправильний напрямок зміщення transform location rotation scale нульові значення">
+          <p class="section-kicker">15 / TROUBLESHOOTING</p>
+          <h2>Розв’язання типових проблем</h2>
+
+          <details open>
+            <summary>Панель показує NOT READY</summary>
+            <div class="details-body">
+              <p>Відкрийте Level Sequence, натисніть <strong>Refresh</strong> у Character і виберіть MetaHuman, чий Face Control Rig присутній в активній секвенції.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Target Gaze увімкнено, але Generate заблоковано</summary>
+            <div class="details-body">
+              <p>Створіть AVA Gaze Target або виберіть Actor через <strong>Pick Selected</strong>. Якщо AVA target належить іншому MetaHuman, прикріпіть його до поточного персонажа або від’єднайте у World.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Target Gaze увімкнено, але очі дивляться в неправильному напрямку</summary>
+            <div class="details-body">
+              <p>Перевірте Transform самого MetaHuman Actor у панелі Details. Зміщення об’єкта може спотворити розрахунок напрямку погляду. Для перевірки встановіть <strong>Location X/Y/Z = 0</strong>, <strong>Rotation X/Y/Z = 0</strong> і <strong>Scale X/Y/Z = 1</strong>, потім натисніть <strong>Refresh</strong> та виконайте Regenerate. Scale не слід обнуляти.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Head / Eye показує попередження</summary>
+            <div class="details-body">
+              <p>Анімація очей усе ще може генеруватися правильно. Для Head / Eye Coordination додатково потрібні відповідний Body/FK Control Rig і world-space gaze target.</p>
+            </div>
+          </details>
+          <details>
+            <summary>AVA не впливає на наявну facial animation</summary>
+            <div class="details-body">
+              <p>Переконайтеся, що facial performance доступна на MetaHuman Face Control Rig у Sequencer. Якщо є лише Animation Sequence, спочатку підготуйте її для Control Rig.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Моргання виглядають подвоєними</summary>
+            <div class="details-body">
+              <p>Переконайтеся, що встановлена лише одна актуальна версія AVA. Виконайте <strong>Clear</strong>, щоб видалити старі managed sections, а потім згенеруйте результат знову.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Bake недоступний або завершився помилкою</summary>
+            <div class="details-body">
+              <p>Кнопка доступна лише за статусу <strong>READY</strong> і вибраного Character. Відкрийте потрібну Level Sequence, натисніть <strong>Refresh</strong> і переконайтеся, що MetaHuman має прямі Sequencer bindings для Body та Face, а в проєкті доступні <code>MetaHuman_ControlRig</code> і <code>Face_ControlBoard_CtrlRig</code>. Докладна причина виводиться в Unreal Output Log.</p>
+              <p>Оскільки Bake виконується послідовно — Body, потім Face — помилка на другому етапі може виникнути вже після успішного Body bake. У такому разі відновіть заздалегідь збережену копію секвенції, усуньте проблему Face Rig і запустіть Bake знову.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Куди надіслати діагностичні дані?</summary>
+            <div class="details-body">
+              <p>Скопіюйте пов’язані з AVA рядки з Unreal Output Log і надішліть їх разом із версією UE, версією AVA та коротким описом кроків відтворення проблеми на <a href="mailto:avaeyeanimator@gmail.com">avaeyeanimator@gmail.com</a>.</p>
+            </div>
+          </details>
+        </section>
+
+        <div class="no-results" id="ukNoResults">У тексті посібника нічого не знайдено. Спробуйте інше слово або очистьте пошук.</div>
+
+        <footer class="doc-footer">
+          <div class="doc-footer-inner">
+            <span>AVA EYE Cinematic 1.1.1 · User Manual · UA / EN</span>
+            <span>Copyright © 2026 Anton Vasianovych. All rights reserved.</span>
+          </div>
+        </footer>
+      </article>
+
+      <article class="language-panel" data-language-panel="en" hidden>
+        <header class="document-head">
+          <img class="document-hero-image" src="Images/Manual/FAB_Thumbnail_AVA_EYE_Cinematic_1920x1080.jpg" width="1920" height="1080" alt="AVA EYE Cinematic — MetaHuman eye animation for Sequencer">
+        </header>
+        <div class="document-intro">
+            <p class="eyebrow">User manual · English</p>
+            <h1>Living eyes in Sequencer — from the first click to the final shot</h1>
+            <p class="lede">AVA EYE Cinematic creates controllable procedural eye, blink, and head animation for MetaHumans while preserving the source facial animation.</p>
+            <div class="meta-row">
+              <span class="meta-pill accent">Version 1.1.1</span>
+              <span class="meta-pill">Unreal Engine 5.8.x</span>
+              <span class="meta-pill">Windows 64-bit</span>
+              <span class="meta-pill">Editor / Sequencer</span>
+              <span class="meta-pill">Release Manual</span>
+            </div>
+        </div>
+
+        <div class="workflow-strip" aria-label="Main workflow">
+          <div class="workflow-step" data-step="01"><strong>Open</strong><span>the Level Sequence</span></div>
+          <div class="workflow-step" data-step="02"><strong>Select</strong><span>the MetaHuman and range</span></div>
+          <div class="workflow-step" data-step="03"><strong>Tune</strong><span>gaze and motion</span></div>
+          <div class="workflow-step" data-step="04"><strong>Finish</strong><span>Generate → review → Bake</span></div>
+        </div>
+
+        <section class="manual-section" id="en-overview" data-searchable="purpose workflow procedural animation non destructive">
+          <p class="section-kicker">01 / FOUNDATION</p>
+          <h2>What AVA EYE Cinematic does</h2>
+          <p>The plugin adds a controllable eye-performance system on top of existing animation: primary saccades, small Eye Darts, blinks, eyelid response, subtle facial detail, and head/neck motion. It works inside Level Sequencer on the selected MetaHuman's Control Rig.</p>
+
+          <div class="cards">
+            <div class="card">
+              <span class="card-number">A</span>
+              <h3>Free Gaze</h3>
+              <p>Procedural eye motion without a target object. Saccades and Eye Darts work independently and do not require Target Gaze.</p>
+            </div>
+            <div class="card">
+              <span class="card-number">B</span>
+              <h3>Target Gaze</h3>
+              <p>Precise gaze at a TargetPoint, Actor, camera, or Sequencer spawnable. The target can follow the head or be animated in world space.</p>
+            </div>
+          </div>
+
+          <div class="callout good">
+            <strong>Your source animation remains untouched until the final Bake</strong>
+            <p>AVA creates separate sections marked <code>[Managed]</code>. <strong>Clear</strong> removes only AVA's result and restores the original sequence state. <strong>BAKE AVA TO BASE CONTROLS</strong> is a separate finalization step that consolidates the current layers into base Control Rig layers.</p>
+          </div>
+        </section>
+
+        <section class="manual-section" id="en-prepare" data-searchable="preparation installation plugin dependencies control rig python">
+          <p class="section-kicker">02 / PREPARATION</p>
+          <h2>Before you begin</h2>
+
+          <h3>Requirements</h3>
+          <ul>
+            <li>Unreal Engine 5.8.x on Windows 64-bit.</li>
+            <li>The Unreal plugins <strong>Python Editor Script Plugin</strong>, <strong>Control Rig</strong>, and <strong>Sequencer Scripting</strong>.</li>
+            <li>A Level Sequence containing a MetaHuman Face Control Rig.</li>
+            <li>For Head / Neck features: a MetaHuman Body Control Rig, or a compatible Unreal FK Control Rig with the <code>head</code> and <code>neck_01</code> bone controls.</li>
+          </ul>
+
+          <h3>Installation</h3>
+          <ol class="checklist">
+            <li><span>Close Unreal Editor before replacing or updating the plugin.</span></li>
+            <li><span>Copy the <code>AVA_EyeAnimator</code> folder to <code>&lt;Project&gt;/Plugins/</code>.</span></li>
+            <li><span>Open the project and allow Unreal to build the Editor module if prompted.</span></li>
+            <li><span>Open <strong>Tools → AVA EYE Cinematic</strong> and dock the panel wherever it is convenient.</span></li>
+          </ol>
+
+          <figure class="screenshot-figure menu-shot">
+            <div class="screenshot-card">
+              <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_Menu.png" data-caption="The AVA EYE Cinematic command in the Tools menu." aria-label="Enlarge the Tools menu screenshot">
+                <img src="Images/Manual/AVA_EYE_Cinematic_Menu.png" width="247" height="977" alt="Unreal Editor Tools menu with the AVA EYE Cinematic command" loading="lazy" decoding="async">
+                <span class="zoom-hint" aria-hidden="true">Enlarge ↗</span>
+              </button>
+            </div>
+            <figcaption>Open the panel through <strong>Tools → AVA EYE Cinematic</strong>. Select the image to view it at full size.</figcaption>
+          </figure>
+
+          <div class="callout warm">
+            <strong>If you only have an Animation Sequence</strong>
+            <p>First add it to the MetaHuman Face track in Sequencer and prepare or bake it to the MetaHuman Face Control Rig. AVA works with Control Rig in Sequencer and does not modify the Animation Sequence asset directly.</p>
+          </div>
+        </section>
+
+        <section class="manual-section" id="en-quick-start" data-searchable="quick start natural generate saccades darts blink">
+          <p class="section-kicker">03 / FIRST RESULT</p>
+          <h2>Quick start: a 5–10 second test</h2>
+          <ol class="checklist">
+            <li><span>Open the required Level Sequence and set the Playback Range to a short section.</span></li>
+            <li><span>In <strong>Character</strong>, select <strong>Refresh</strong> and choose the MetaHuman.</span></li>
+            <li><span>In <strong>Shot</strong>, choose the <strong>Natural</strong> preset, then select <strong>Playback</strong>.</span></li>
+            <li><span>Leave <strong>Target Gaze off</strong>. Enable Saccades, Eye Darts, Blinks, Blink Intelligence, and Eyelid Follow.</span></li>
+            <li><span>Select <strong>GENERATE AVA</strong> and play the section in real time.</span></li>
+            <li><span>Change the Seed or select <strong>New Seed</strong> to quickly produce another variation.</span></li>
+            <li><span>In a test copy, select <strong>Clear</strong> to confirm that the original facial animation returns completely.</span></li>
+            <li><span>Once the result is approved, Generate/Regenerate it again, save a copy of the Level Sequence, and select <strong>BAKE AVA TO BASE CONTROLS</strong>.</span></li>
+          </ol>
+          <div class="callout">
+            <strong>Recommended tuning order</strong>
+            <p>Evaluate the eyes first. Add Blinks and Eyelid Follow next, then add Head / Neck motion. This makes the contribution of each layer easier to judge.</p>
+          </div>
+        </section>
+
+        <section class="manual-section" id="en-interface" data-searchable="interface panel character shot gaze motion generate">
+          <p class="section-kicker">04 / INTERFACE</p>
+          <h2>Panel map</h2>
+          <p>Read the panel from top to bottom: character and shot selection, gaze mode, eye motion, blinks and face, head/neck, generation, final Bake, and diagnostics. Select any screenshot in this manual to open the full-size view.</p>
+
+          <div class="screenshot-grid">
+            <figure class="screenshot-figure">
+              <div class="screenshot-card">
+                <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_Panel_Sanitized_v111.png" data-caption="The complete AVA EYE Cinematic 1.1.1 panel. The internal Binding line has been removed for privacy." aria-label="Enlarge the complete AVA EYE Cinematic 1.1.1 panel">
+                  <img src="Images/Manual/AVA_EYE_Cinematic_Panel_Sanitized_v111.png" width="763" height="2061" alt="Complete AVA EYE Cinematic 1.1.1 panel with the Binding line removed" loading="lazy" decoding="async">
+                  <span class="zoom-hint" aria-hidden="true">Enlarge ↗</span>
+                </button>
+              </div>
+              <figcaption>The updated 1.1.1 panel with the Bake button. The internal <code>Binding</code> line is hidden with the panel color.</figcaption>
+            </figure>
+
+            <figure class="screenshot-figure">
+              <div class="screenshot-card">
+                <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_Character_Shot.png" data-caption="Character and Shot: character selection, preset, Seed, and generation range." aria-label="Enlarge the Character and Shot screenshot">
+                  <img src="Images/Manual/AVA_EYE_Cinematic_Character_Shot.png" width="439" height="193" alt="Character and Shot sections in the AVA EYE Cinematic panel" loading="lazy" decoding="async">
+                  <span class="zoom-hint" aria-hidden="true">Enlarge ↗</span>
+                </button>
+              </div>
+              <figcaption><strong>Character</strong> selects the MetaHuman; <strong>Shot</strong> defines the Preset, Seed, and generation range.</figcaption>
+            </figure>
+          </div>
+
+          <table class="option-table">
+            <thead><tr><th>Section</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td>Character</td><td>Selects a MetaHuman through its unique Sequencer Face Binding. This is especially important when a shot contains multiple characters.</td></tr>
+              <tr><td>Shot</td><td>Defines the motion character, repeatable Seed, and generation range.</td></tr>
+              <tr><td>Gaze</td><td>Selects Free Gaze or Target Gaze and the Speaker/Listener behavior.</td></tr>
+              <tr><td>Eye Motion</td><td>Primary Saccade fixations and smaller grouped Eye Darts.</td></tr>
+              <tr><td>Blinks &amp; Face</td><td>Blinks, eyelid response, and optional subtle facial detail.</td></tr>
+              <tr><td>Head / Neck</td><td>Procedural idle motion and head coordination with a world-space gaze target.</td></tr>
+              <tr><td>Generate</td><td>Generation, safe regeneration, a new Seed, removal of AVA layers, and final Bake to base controls.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="manual-section" id="en-free-gaze" data-searchable="free gaze target off saccades eye darts head relative">
+          <p class="section-kicker">05 / FREE GAZE</p>
+          <h2>Procedural gaze without a target</h2>
+          <p>Free Gaze activates automatically when <strong>Target Gaze is off</strong>. AVA builds a neutral point in front of the head and creates eye motion around it.</p>
+
+          <figure class="screenshot-figure compact">
+            <div class="screenshot-card">
+              <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_Free_Gaze.png" data-caption="Free Gaze: Target Gaze is off, while Saccades and Eye Darts remain independently available." aria-label="Enlarge the Free Gaze screenshot">
+                <img src="Images/Manual/AVA_EYE_Cinematic_Free_Gaze.png" width="439" height="204" alt="Free Gaze settings with Target Gaze disabled" loading="lazy" decoding="async">
+                <span class="zoom-hint" aria-hidden="true">Enlarge ↗</span>
+              </button>
+            </div>
+            <figcaption>Free Gaze needs no target: Saccades and Eye Darts continue to work as independent features.</figcaption>
+          </figure>
+
+          <div class="callout good">
+            <strong>In the current build</strong>
+            <p>Saccades and Eye Darts are fully independent of Target Gaze. You can enable only Saccades, only Eye Darts, both effects, or neither.</p>
+          </div>
+
+          <h3>When to use it</h3>
+          <ul>
+            <li>The character is not looking at one precisely defined object.</li>
+            <li>You want natural eye activity layered over facial mocap.</li>
+            <li>You want to find a suitable variation quickly by changing the Seed.</li>
+            <li>The shot needs an artistic point of attention rather than a geometrically exact target.</li>
+          </ul>
+
+          <h3>Minimal setup</h3>
+          <p><strong>Natural → Saccades ON → Eye Darts ON → Strength 1.00× → Dart Strength 2.00×.</strong> For a calm close-up, reduce Strength before disabling the entire layer.</p>
+        </section>
+
+        <section class="manual-section" id="en-target-gaze" data-searchable="target gaze create pick selected actor camera world head anchored animated tracking">
+          <p class="section-kicker">06 / TARGET GAZE</p>
+          <h2>Precise gaze at an object</h2>
+          <p>Enable <strong>Target Gaze</strong> when an artist must define the exact point of attention: a prop, camera, another Actor, or an AVA TargetPoint.</p>
+
+          <figure class="screenshot-figure compact">
+            <div class="screenshot-card">
+              <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_Target_Gaze.png" data-caption="Target Gaze: select, create, preview, and add a target to Sequencer." aria-label="Enlarge the Target Gaze screenshot">
+                <img src="Images/Manual/AVA_EYE_Cinematic_Target_Gaze.png" width="439" height="168" alt="Target Gaze settings in the AVA EYE Cinematic panel" loading="lazy" decoding="async">
+                <span class="zoom-hint" aria-hidden="true">Enlarge ↗</span>
+              </button>
+            </div>
+            <figcaption>After enabling Target Gaze, select an existing target or create an AVA Gaze Target.</figcaption>
+          </figure>
+
+          <div class="cards">
+            <div class="card">
+              <span class="card-number">01</span>
+              <h3>Create</h3>
+              <p>Creates a dedicated AVA Gaze Target for the selected MetaHuman. Use it when the scene does not yet contain a suitable object.</p>
+            </div>
+            <div class="card">
+              <span class="card-number">02</span>
+              <h3>Pick Selected</h3>
+              <p>Uses the selected Actor, camera, or resolved Sequencer spawnable as the gaze target.</p>
+            </div>
+            <div class="card">
+              <span class="card-number">03</span>
+              <h3>Preview / Select</h3>
+              <p><strong>Preview</strong> checks the direction; <strong>Select</strong> finds the current target in the Editor.</p>
+            </div>
+            <div class="card">
+              <span class="card-number">04</span>
+              <h3>Add to Sequencer</h3>
+              <p>Adds the target to the Level Sequence so its position can be keyed and animated.</p>
+            </div>
+          </div>
+
+          <h3>Attach to Head or Detach to World</h3>
+          <table class="option-table">
+            <thead><tr><th>Mode</th><th>Behavior</th><th>When to use it</th></tr></thead>
+            <tbody>
+              <tr><td>Attach to Head</td><td>The target follows the character's head.</td><td>Use it for a local reference or a stable relative pose.</td></tr>
+              <tr><td>Detach to World</td><td>The target becomes independent in world space.</td><td>Use it when the character must keep looking at an object while the head or body moves.</td></tr>
+            </tbody>
+          </table>
+
+          <figure class="screenshot-figure">
+            <div class="screenshot-card">
+              <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_World_Target_Sequencer.png" data-caption="World Target in Level Sequencer: animate its position with ordinary keys." aria-label="Enlarge the World Target in Sequencer screenshot">
+                <img src="Images/Manual/AVA_EYE_Cinematic_World_Target_Sequencer.png" width="714" height="290" alt="AVA Gaze Target in world space with its Transform track in Sequencer" loading="lazy" decoding="async">
+                <span class="zoom-hint" aria-hidden="true">Enlarge ↗</span>
+              </button>
+            </div>
+            <figcaption>A World Target added to Level Sequencer: animate its Transform with standard keys.</figcaption>
+          </figure>
+
+          <h3>Animated Tracking</h3>
+          <p>Enable it for a moving target. AVA samples the target across the selected range, maintains the world lock relative to character motion, and applies Smooth Pursuit with corrective catch-up saccades only when the target actually moves.</p>
+
+          <figure class="screenshot-figure">
+            <div class="screenshot-card">
+              <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_Gaze_Debug.png" data-caption="Show Gaze Debug displays the lines and points used to verify gaze direction." aria-label="Enlarge the Gaze Debug screenshot">
+                <img src="Images/Manual/AVA_EYE_Cinematic_Gaze_Debug.png" width="790" height="505" alt="Gaze-direction debug visualization in Unreal Editor" loading="lazy" decoding="async">
+                <span class="zoom-hint" aria-hidden="true">Enlarge ↗</span>
+              </button>
+            </div>
+            <figcaption><strong>Show Gaze Debug</strong> lets you verify the direction, target, and tracking behavior visually.</figcaption>
+          </figure>
+
+          <div class="callout warm">
+            <strong>Head / Eye Coordination requires a World Target</strong>
+            <p>To make the head follow the eyes, detach the AVA target to World or select an independent Actor or camera.</p>
+          </div>
+        </section>
+
+        <section class="manual-section" id="en-eye-motion" data-searchable="saccades eye darts strength target area pattern random scanning tracking search">
+          <p class="section-kicker">07 / EYE MOTION</p>
+          <h2>Saccades and Eye Darts</h2>
+
+          <h3>Saccades</h3>
+          <p>Primary fixation changes: noticeable but fast eye movements between points of attention.</p>
+          <table class="option-table">
+            <tbody>
+              <tr><td>Strength</td><td>Amplitude of the primary saccades: <strong>0.25×–1.50×</strong>. Start at 1.00×.</td></tr>
+              <tr><td>Target Area</td><td>Fixation spread around Target Gaze: <strong>0.00–0.60</strong>. This setting appears only when a target is enabled.</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Eye Darts</h3>
+          <p>Small grouped re-fixation movements within the broader gaze behavior. In AVA's original terminology, these are Advanced Step Saccades.</p>
+          <table class="option-table">
+            <tbody>
+              <tr><td>Pattern</td><td><strong>Random</strong>, <strong>Scanning</strong>, <strong>Tracking</strong>, or <strong>Search</strong>.</td></tr>
+              <tr><td>Dart Strength</td><td>Artistic strength of Eye Darts: <strong>2.00×–8.00×</strong>. For a realistic close-up, begin at the minimum.</td></tr>
+            </tbody>
+          </table>
+
+          <div class="callout">
+            <strong>Biomechanically grounded saccade timing</strong>
+            <p>AVA calculates saccade duration with a Main Sequence amplitude–duration model: larger eye movements take correspondingly longer. The scientific basis is the human eye-movement research of Bahill, Clark &amp; Stark (1975), further developed by Bahill &amp; Stark (1979).</p>
+          </div>
+
+          <details>
+            <summary>How do the Eye Darts patterns differ?</summary>
+            <div class="details-body">
+              <ul>
+                <li><strong>Random</strong> — a versatile irregular pattern.</li>
+                <li><strong>Scanning</strong> — a clearer scan across an area.</li>
+                <li><strong>Tracking</strong> — restrained corrections suited to sustained attention.</li>
+                <li><strong>Search</strong> — a more exploratory searching pattern.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary>What does Seed do?</summary>
+            <div class="details-body">
+              <p>The same settings and the same Seed produce a repeatable result. Use <strong>−1</strong> and <strong>+1</strong> to step through variations; <strong>Random</strong> chooses a new Seed.</p>
+            </div>
+          </details>
+        </section>
+
+        <section class="manual-section" id="en-blinks" data-searchable="blinks blink intelligence smart replacement eyelid follow squint brow">
+          <p class="section-kicker">08 / BLINKS &amp; FACE</p>
+          <h2>Blinks, eyelids, and subtle detail</h2>
+
+          <figure class="screenshot-figure compact">
+            <div class="screenshot-card">
+              <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_Blink_Face.png" data-caption="Blinks & Face: procedural blinks, Blink Intelligence, Eyelid Follow, and Facial Micro Detail." aria-label="Enlarge the Blinks and Face screenshot">
+                <img src="Images/Manual/AVA_EYE_Cinematic_Blink_Face.png" width="427" height="148" alt="Blinks and Face section in the AVA EYE Cinematic panel" loading="lazy" decoding="async">
+                <span class="zoom-hint" aria-hidden="true">Enlarge ↗</span>
+              </button>
+            </div>
+            <figcaption>Primary blinks and eyelid response are enabled separately from the optional Squint Micro and Brow Micro detail.</figcaption>
+          </figure>
+
+          <table class="option-table">
+            <tbody>
+              <tr><td>Blinks</td><td>Creates procedural blinks within the selected range.</td></tr>
+              <tr><td>Blink Intelligence</td><td>Places blinks around gaze changes and re-engagement, and safely replaces detected bilateral mocap blinks.</td></tr>
+              <tr><td>Eyelid Follow</td><td>Adds an eyelid response linked to gaze direction.</td></tr>
+              <tr><td>Squint Micro</td><td>Optional subtle squint variation.</td></tr>
+              <tr><td>Brow Micro</td><td>Optional subtle brow variation.</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Smart Blink Replacement</h3>
+          <p>When AVA finds reliable bilateral events on <code>CTRL_L_eye_blink</code> and <code>CTRL_R_eye_blink</code>, it uses their timing as anchors. The new curve is written to a separate absolute section named <code>AVA Smart Blink Override [Managed]</code>. The source facial section is not edited.</p>
+          <p>If no suitable events are found, the plugin automatically falls back to the regular procedural Smart Blink.</p>
+        </section>
+
+        <section class="manual-section" id="en-head-neck" data-searchable="head neck idle amplitude coordination follow speaker listener performance facial mocap">
+          <p class="section-kicker">09 / HEAD &amp; NECK</p>
+          <h2>Head and neck motion</h2>
+
+          <figure class="screenshot-figure compact">
+            <div class="screenshot-card">
+              <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_Head_Neck.png" data-caption="Head / Neck: idle amplitude, head/eye coordination, and Head Follow strength." aria-label="Enlarge the Head and Neck screenshot">
+                <img src="Images/Manual/AVA_EYE_Cinematic_Head_Neck.png" width="427" height="113" alt="Head and Neck section in the AVA EYE Cinematic panel" loading="lazy" decoding="async">
+                <span class="zoom-hint" aria-hidden="true">Enlarge ↗</span>
+              </button>
+            </div>
+            <figcaption>Head / Neck Idle and Head / Eye Coordination are independent switches with separate strength controls.</figcaption>
+          </figure>
+
+          <h3>Head / Neck Idle</h3>
+          <p>Adds subtle deterministic posture motion in a separate additive section. <strong>Idle Amplitude</strong> ranges from <strong>0.10× to 10.00×</strong>; 1.00× is the natural baseline, while higher values intentionally become more expressive.</p>
+          <p>When both head and neck controls are available, motion is distributed across the hierarchy. Otherwise AVA uses a head-only fallback. A compatible Unreal FK Control Rig is supported when no separate Body Control Rig is present.</p>
+
+          <h3>Behavior: Listener / Speaker</h3>
+          <div class="cards">
+            <div class="card">
+              <h4>Listener</h4>
+              <p>Maintains steadier contact with short, natural gaze aversions. With Head / Neck Idle enabled, AVA looks for strong facial-reaction events and adds soft acknowledgement nods only when the signal is reliable.</p>
+            </div>
+            <div class="card">
+              <h4>Speaker</h4>
+              <p>Uses more frequent gaze aversions with automatic re-engagement. AVA analyzes jaw, mouth, and lip activity and adds smooth head accents within speech passages.</p>
+            </div>
+          </div>
+
+          <h3>Head / Eye Coordination</h3>
+          <p>Available with Target Gaze. The eyes acquire the world target first; after a short delay, the head follows while eye counter-rotation maintains the point of attention.</p>
+          <table class="option-table">
+            <tbody>
+              <tr><td>Head Follow</td><td><strong>25%–100%</strong>. Controls how strongly the head catches up with the World Target.</td></tr>
+              <tr><td>Response</td><td><strong>50–300 ms</strong>. Lower values make the head respond sooner; higher values let the eyes lead for longer.</td></tr>
+              <tr><td>Catch-up</td><td><strong>0.05–0.50</strong>. Error threshold after which the head accelerates its catch-up motion.</td></tr>
+            </tbody>
+          </table>
+          <div class="callout">
+            <strong>Facial mocap analysis is read-only</strong>
+            <p>AVA temporarily excludes its own managed Face sections from analysis, so Regenerate does not mistake a previous AVA result for a new source performance.</p>
+          </div>
+        </section>
+
+        <section class="manual-section" id="en-generate" data-searchable="generate regenerate new seed clear bake ready warning">
+          <p class="section-kicker">10 / OUTPUT</p>
+          <h2>Generate, Regenerate, New Seed, and Clear</h2>
+
+          <figure class="screenshot-figure compact">
+            <div class="screenshot-card">
+              <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_Generate.png" data-caption="Generate in version 1.1.1: generation, regeneration, a new Seed, Clear, and Bake to base controls." aria-label="Enlarge the updated Generate section">
+                <img src="Images/Manual/AVA_EYE_Cinematic_Generate.png" width="486" height="150" alt="Updated Generate section with the Bake AVA to Base Controls button" loading="lazy" decoding="async">
+                <span class="zoom-hint" aria-hidden="true">Enlarge ↗</span>
+              </button>
+            </div>
+            <figcaption>Version 1.1.1 adds <strong>BAKE AVA TO BASE CONTROLS</strong> below the Generate commands. Viewport target shows the active target and coordinate mode.</figcaption>
+          </figure>
+
+          <table class="option-table">
+            <tbody>
+              <tr><td>GENERATE AVA</td><td>Creates AVA animation for the selected Character and range. The button is enabled only when the panel status is READY.</td></tr>
+              <tr><td>Regenerate</td><td>Safely replaces the current AVA-managed result with the current settings and the same Seed.</td></tr>
+              <tr><td>New Seed</td><td>Creates a new procedural variation without entering a Seed manually.</td></tr>
+              <tr><td>Clear</td><td>Removes only the selected character's AVA-managed sections. Source facial and body animation is not deleted.</td></tr>
+              <tr><td>BAKE AVA TO BASE CONTROLS</td><td>After confirmation, runs Unreal's native Bake for Body and then Face. See the <a href="#en-bake">next section</a> for the full workflow.</td></tr>
+            </tbody>
+          </table>
+          <div class="callout warm">
+            <strong>Before processing a long shot</strong>
+            <p>Test a 5–10 second range first. Once the motion character is approved, extend the Playback Range and run the final Regenerate. Do not Bake while you still need to compare, clear, or retune individual AVA Managed Sections.</p>
+          </div>
+        </section>
+
+        <section class="manual-section" id="en-bake" data-searchable="bake ava base controls body face metahuman control rig final">
+          <p class="section-kicker">11 / FINALIZATION</p>
+          <h2>Bake AVA to Base Controls</h2>
+          <p>The new <strong>1.1.1</strong> command automates the standard Sequencer workflow for the selected MetaHuman. It runs <strong>Body → Bake To Control Rig → <code>MetaHuman_ControlRig</code></strong>, followed by <strong>Face → Bake To Control Rig → <code>Face_ControlBoard_CtrlRig</code></strong>.</p>
+
+          <ol class="checklist">
+            <li><span>Approve the AVA result completely and confirm that the correct Character is selected in the panel.</span></li>
+            <li><span>Save the Level Sequence or make a copy because Bake changes the Control Rig layer structure.</span></li>
+            <li><span>Select <strong>BAKE AVA TO BASE CONTROLS</strong> and confirm the <strong>Bake AVA to Base Controls</strong> dialog.</span></li>
+            <li><span>Wait for both stages to finish—Body first, then Face—and review the result in playback.</span></li>
+            <li><span>In Sequencer, verify that Body and Face each contain one baked base Control Rig section.</span></li>
+          </ol>
+
+          <table class="option-table">
+            <thead><tr><th>Stage</th><th>What AVA does</th></tr></thead>
+            <tbody>
+              <tr><td>Body</td><td>Uses the exact Body binding of the selected character and bakes the current animation to <code>MetaHuman_ControlRig</code>.</td></tr>
+              <tr><td>Face</td><td>Uses the exact Face binding of the same character and bakes the current animation to <code>Face_ControlBoard_CtrlRig</code>.</td></tr>
+              <tr><td>Result</td><td>Unreal replaces the current Control Rig layers on each slot with one baked base section.</td></tr>
+            </tbody>
+          </table>
+
+          <div class="callout warm">
+            <strong>Bake is finalization, not an alternative to Clear</strong>
+            <p><strong>Clear</strong> removes separate AVA Managed Sections and reveals the untouched source. <strong>Bake</strong> consolidates the current result into base Body and Face Control Rig layers. Save a separate editable version of the Level Sequence before baking.</p>
+          </div>
+        </section>
+
+        <section class="manual-section" id="en-managed" data-searchable="managed sections sequencer clear additive absolute non destructive">
+          <p class="section-kicker">12 / NON-DESTRUCTIVE</p>
+          <h2>What appears in Sequencer</h2>
+          <p>Before Bake, the exact section set depends on the enabled features. Managed section names make it easy to distinguish AVA's result from the source animation.</p>
+
+          <figure class="screenshot-figure">
+            <div class="screenshot-card">
+              <button class="screenshot-button" type="button" data-lightbox="Images/Manual/AVA_EYE_Cinematic_Generation.png" data-caption="AVA generation result in Level Sequencer with separate managed sections." aria-label="Enlarge the Sequencer generation result">
+                <img src="Images/Manual/AVA_EYE_Cinematic_Generation.png" width="718" height="551" alt="AVA-managed sections after generation in Level Sequencer" loading="lazy" decoding="async">
+                <span class="zoom-hint" aria-hidden="true">Enlarge ↗</span>
+              </button>
+            </div>
+            <figcaption>AVA adds its output as separate sections in Level Sequencer without overwriting the source animation.</figcaption>
+          </figure>
+
+          <table class="option-table">
+            <thead><tr><th>Section</th><th>Contents</th></tr></thead>
+            <tbody>
+              <tr><td><code>AVA EYE Cinematic [Managed]</code></td><td>Primary eye motion and subtle facial detail.</td></tr>
+              <tr><td><code>AVA Smart Blink Override [Managed]</code></td><td>Absolute blink section used when replacing source mocap blinks.</td></tr>
+              <tr><td><code>AVA Target Gaze Override [Managed]</code></td><td>Precise target-gaze control where the override architecture is used.</td></tr>
+              <tr><td><code>AVA Head / Neck Idle [Managed]</code></td><td>Independent additive head and neck idle motion.</td></tr>
+              <tr><td><code>AVA Head Follow [Managed]</code></td><td>Additive head-follow result from Head / Eye Coordination.</td></tr>
+            </tbody>
+          </table>
+          <p>Before Bake, compare the result with the original using <strong>Clear</strong>, Undo, or by temporarily disabling a managed section in Sequencer. After <strong>BAKE AVA TO BASE CONTROLS</strong>, this layered structure is replaced by one base Control Rig section on Body and one on Face.</p>
+        </section>
+
+        <section class="manual-section" id="en-recipes" data-searchable="recipes starting points natural calm nervous closeup dialogue target">
+          <p class="section-kicker">13 / STARTING POINTS</p>
+          <h2>Suggested starting points</h2>
+          <p class="muted">These are starting points, not strict rules. Find a suitable Seed first, then adjust amplitude.</p>
+
+          <div class="cards">
+            <div class="card recipe" data-code="FREE-01">
+              <h3>Natural close-up</h3>
+              <p>Subtle, living eye activity over an existing facial performance.</p>
+              <div class="setting-list">
+                <div class="setting"><span>Preset</span><strong>Natural</strong></div>
+                <div class="setting"><span>Target Gaze</span><strong>OFF</strong></div>
+                <div class="setting"><span>Saccades</span><strong>ON · 0.75–1.00×</strong></div>
+                <div class="setting"><span>Eye Darts</span><strong>Random · 2.00×</strong></div>
+                <div class="setting"><span>Eyelid Follow</span><strong>ON</strong></div>
+              </div>
+            </div>
+            <div class="card recipe" data-code="TARGET-01">
+              <h3>Precise gaze into camera</h3>
+              <p>Fixation on a CineCameraActor with a small amount of natural variation.</p>
+              <div class="setting-list">
+                <div class="setting"><span>Preset</span><strong>Calm</strong></div>
+                <div class="setting"><span>Target</span><strong>Pick Selected Camera</strong></div>
+                <div class="setting"><span>Target Area</span><strong>0.05–0.12</strong></div>
+                <div class="setting"><span>Saccades</span><strong>ON · 0.50–0.75×</strong></div>
+                <div class="setting"><span>Animated Tracking</span><strong>if the camera moves</strong></div>
+              </div>
+            </div>
+            <div class="card recipe" data-code="ROLE-01">
+              <h3>Attentive listener</h3>
+              <p>Steady contact with a soft head response to facial performance.</p>
+              <div class="setting-list">
+                <div class="setting"><span>Behavior</span><strong>Listener</strong></div>
+                <div class="setting"><span>Head / Neck Idle</span><strong>ON · 0.60–1.00×</strong></div>
+                <div class="setting"><span>Blink Intelligence</span><strong>ON</strong></div>
+                <div class="setting"><span>Facial Micro</span><strong>as needed</strong></div>
+              </div>
+            </div>
+            <div class="card recipe" data-code="ROLE-02">
+              <h3>Nervous search</h3>
+              <p>More active fixations with stronger short re-fixation movements.</p>
+              <div class="setting-list">
+                <div class="setting"><span>Preset</span><strong>Nervous</strong></div>
+                <div class="setting"><span>Saccades</span><strong>ON · 1.00–1.25×</strong></div>
+                <div class="setting"><span>Eye Darts</span><strong>Search · 2.5–4.0×</strong></div>
+                <div class="setting"><span>Head / Neck Idle</span><strong>ON · up to 1.25×</strong></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="manual-section" id="en-diagnostics" data-searchable="diagnostics show gaze debug inspect rig facial layer check output log">
+          <p class="section-kicker">14 / SUPPORT</p>
+          <h2>Diagnostics</h2>
+          <p>Expand <strong>Diagnostics | Support / Rig Info</strong> when you need to verify the selected Face Rig, Body Rig, Binding, or Target Gaze accuracy.</p>
+          <table class="option-table">
+            <tbody>
+              <tr><td>Show Gaze Debug</td><td>Displays in the viewport: cyan—the ray to the World Target; green—the actual +Z direction of the eye bones; red—the target point; yellow—the camera component when it is offset from the Actor root.</td></tr>
+              <tr><td>Gaze Error</td><td>Estimates the angular difference between the actual gaze and the target.</td></tr>
+              <tr><td>Inspect Rig</td><td>Prints technical information about the detected Control Rigs.</td></tr>
+              <tr><td>Inspect Facial</td><td>Checks the facial animation available for analysis and blink replacement.</td></tr>
+              <tr><td>Layer Check</td><td>Checks AVA-managed sections and their state.</td></tr>
+            </tbody>
+          </table>
+          <p class="small muted">Short messages appear in the artist-facing panel. Full technical details and Python tracebacks are available in Unreal Output Log.</p>
+        </section>
+
+        <section class="manual-section" id="en-troubleshooting" data-searchable="error not ready target blocked head eye warning blinks doubled clear bake body face control rig support wrong direction offset transform location rotation scale zero values">
+          <p class="section-kicker">15 / TROUBLESHOOTING</p>
+          <h2>Troubleshooting</h2>
+
+          <details open>
+            <summary>The panel shows NOT READY</summary>
+            <div class="details-body">
+              <p>Open the Level Sequence, select <strong>Refresh</strong> in Character, and choose the MetaHuman whose Face Control Rig is present in the active sequence.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Target Gaze is enabled, but Generate is blocked</summary>
+            <div class="details-body">
+              <p>Create an AVA Gaze Target or select an Actor with <strong>Pick Selected</strong>. If the AVA target belongs to another MetaHuman, attach it to the current character or detach it to World.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Target Gaze is enabled, but the eyes look in the wrong direction</summary>
+            <div class="details-body">
+              <p>Check the MetaHuman Actor's Transform in the Details panel. An Actor offset can distort the calculated gaze direction. For verification, set <strong>Location X/Y/Z = 0</strong>, <strong>Rotation X/Y/Z = 0</strong>, and <strong>Scale X/Y/Z = 1</strong>. Then select <strong>Refresh</strong> and Regenerate. Do not set Scale to zero.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Head / Eye displays a warning</summary>
+            <div class="details-body">
+              <p>Eye animation may still generate correctly. Head / Eye Coordination additionally requires a compatible Body or FK Control Rig and a world-space gaze target.</p>
+            </div>
+          </details>
+          <details>
+            <summary>AVA does not affect the existing facial animation</summary>
+            <div class="details-body">
+              <p>Make sure the facial performance is available on the MetaHuman Face Control Rig in Sequencer. If you only have an Animation Sequence, prepare it for Control Rig first.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Blinks appear doubled</summary>
+            <div class="details-body">
+              <p>Make sure only one current version of AVA is installed. Select <strong>Clear</strong> to remove old managed sections, then generate the result again.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Bake is unavailable or finishes with an error</summary>
+            <div class="details-body">
+              <p>The button is enabled only when the panel status is <strong>READY</strong> and a Character is selected. Open the required Level Sequence, select <strong>Refresh</strong>, and confirm that the MetaHuman has direct Body and Face Sequencer bindings and that <code>MetaHuman_ControlRig</code> and <code>Face_ControlBoard_CtrlRig</code> are available in the project. The detailed cause is written to Unreal Output Log.</p>
+              <p>Bake runs sequentially—Body first, then Face—so a failure during the second stage can happen after Body has already baked successfully. Restore the sequence copy you saved beforehand, resolve the Face Rig problem, and run Bake again.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Where should I send diagnostic information?</summary>
+            <div class="details-body">
+              <p>Copy the AVA-related lines from Unreal Output Log and send them with your UE version, AVA version, and a short reproduction description to <a href="mailto:avaeyeanimator@gmail.com">avaeyeanimator@gmail.com</a>.</p>
+            </div>
+          </details>
+        </section>
+
+        <div class="no-results" id="enNoResults">Nothing in the manual matches your search. Try another term or clear the search field.</div>
+
+        <footer class="doc-footer">
+          <div class="doc-footer-inner">
+            <span>AVA EYE Cinematic 1.1.1 · User Manual · UA / EN</span>
+            <span>Copyright © 2026 Anton Vasianovych. All rights reserved.</span>
+          </div>
+        </footer>
+      </article>
+    </main>
+  </div>
+
+  <dialog class="image-lightbox" id="imageLightbox" aria-labelledby="lightboxCaption">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Закрити збільшене зображення">×</button>
+    <img id="lightboxImage" src="" alt="">
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </dialog>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const body = document.body;
+      const langButtons = [...document.querySelectorAll('[data-lang]')];
+      const panels = [...document.querySelectorAll('[data-language-panel]')];
+      const tocPanels = [...document.querySelectorAll('[data-language-toc]')];
+      const sidebar = document.getElementById('sidebar');
+      const sidebarTitle = document.getElementById('sidebarTitle');
+      const sidebarNote = document.getElementById('sidebarNote');
+      const skipLink = document.getElementById('skipLink');
+      const menuButton = document.getElementById('menuButton');
+      const themeButton = document.getElementById('themeButton');
+      const printButton = document.getElementById('printButton');
+      const search = document.getElementById('manualSearch');
+      const clearSearch = document.getElementById('clearSearch');
+      const tocLinks = [...document.querySelectorAll('[data-language-toc] a')];
+      const tocEmpty = document.getElementById('tocEmpty');
+      const noResults = {
+        uk: document.getElementById('ukNoResults'),
+        en: document.getElementById('enNoResults')
+      };
+      const sections = [...document.querySelectorAll('.manual-section')];
+      const ui = {
+        uk: {
+          skip: 'Перейти до вмісту', menu: 'Відкрити зміст', contents: 'Зміст',
+          search: 'Знайти в посібнику…', searchLabel: 'Пошук у посібнику', clear: 'Очистити пошук',
+          empty: 'У змісті немає збігів.', note: 'Усі імена персонажів, секвенцій і цілей на ілюстраціях вигадані. Особисті шляхи та дані відсутні.',
+          print: 'Друк або збереження у PDF', printTitle: 'Друк / PDF', close: 'Закрити збільшене зображення',
+          lightTheme: 'Увімкнути світлу тему', darkTheme: 'Увімкнути темну тему'
+        },
+        en: {
+          skip: 'Skip to content', menu: 'Open contents', contents: 'Contents',
+          search: 'Search the manual…', searchLabel: 'Search the user manual', clear: 'Clear search',
+          empty: 'No matching sections in the contents.', note: 'All character, sequence, and target names shown in the illustrations are fictional. No personal paths or data are included.',
+          print: 'Print or save as PDF', printTitle: 'Print / PDF', close: 'Close enlarged image',
+          lightTheme: 'Use light theme', darkTheme: 'Use dark theme'
+        }
+      };
+      let currentLanguage = 'uk';
+      const storage = {
+        get(key) { try { return localStorage.getItem(key); } catch (_) { return null; } },
+        set(key, value) { try { localStorage.setItem(key, value); } catch (_) {} }
+      };
+
+      function setLanguage(language, resetScroll = true) {
+        const lang = language === 'en' ? 'en' : 'uk';
+        currentLanguage = lang;
+        root.lang = lang;
+        langButtons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.lang === lang)));
+        panels.forEach((panel) => { panel.hidden = panel.dataset.languagePanel !== lang; });
+        tocPanels.forEach((panel) => { panel.hidden = panel.dataset.languageToc !== lang; });
+        const labels = ui[lang];
+        skipLink.textContent = labels.skip;
+        menuButton.setAttribute('aria-label', labels.menu);
+        sidebar.setAttribute('aria-label', labels.contents);
+        sidebarTitle.textContent = labels.contents;
+        sidebarNote.textContent = labels.note;
+        search.placeholder = labels.search;
+        search.setAttribute('aria-label', labels.searchLabel);
+        clearSearch.setAttribute('aria-label', labels.clear);
+        tocEmpty.textContent = labels.empty;
+        printButton.setAttribute('aria-label', labels.print);
+        printButton.title = labels.printTitle;
+        lightboxClose.setAttribute('aria-label', labels.close);
+        document.title = lang === 'uk'
+          ? 'AVA EYE Cinematic 1.1.1 — Посібник користувача'
+          : 'AVA EYE Cinematic 1.1.1 — User Manual';
+        storage.set('ava-manual-language', lang);
+        body.classList.remove('menu-open');
+        menuButton.setAttribute('aria-expanded', 'false');
+        search.value = '';
+        runSearch();
+        setTheme(root.dataset.theme || 'dark');
+        if (resetScroll) window.scrollTo({ top: 0, behavior: 'auto' });
+      }
+
+      function setTheme(theme) {
+        const value = theme === 'light' ? 'light' : 'dark';
+        root.dataset.theme = value;
+        const labels = ui[currentLanguage];
+        themeButton.setAttribute('aria-label', value === 'dark' ? labels.lightTheme : labels.darkTheme);
+        storage.set('ava-manual-theme', value);
+      }
+
+      langButtons.forEach((button) => button.addEventListener('click', () => setLanguage(button.dataset.lang, true)));
+      themeButton.addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+      printButton.addEventListener('click', () => window.print());
+      menuButton.addEventListener('click', () => {
+        const open = body.classList.toggle('menu-open');
+        menuButton.setAttribute('aria-expanded', String(open));
+      });
+      tocLinks.forEach((link) => link.addEventListener('click', () => {
+        body.classList.remove('menu-open');
+        menuButton.setAttribute('aria-expanded', 'false');
+      }));
+      document.addEventListener('click', (event) => {
+        if (body.classList.contains('menu-open') && !sidebar.contains(event.target) && !menuButton.contains(event.target)) {
+          body.classList.remove('menu-open');
+          menuButton.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      const lightbox = document.getElementById('imageLightbox');
+      const lightboxImage = document.getElementById('lightboxImage');
+      const lightboxCaption = document.getElementById('lightboxCaption');
+      const lightboxClose = document.getElementById('lightboxClose');
+      let lightboxTrigger = null;
+
+      document.querySelectorAll('.screenshot-button').forEach((button) => {
+        button.addEventListener('click', () => {
+          const preview = button.querySelector('img');
+          lightboxTrigger = button;
+          lightboxImage.src = button.dataset.lightbox || preview.src;
+          lightboxImage.alt = preview.alt;
+          lightboxCaption.textContent = button.dataset.caption || preview.alt;
+          lightbox.showModal();
+        });
+      });
+      lightboxClose.addEventListener('click', () => lightbox.close());
+      lightbox.addEventListener('click', (event) => {
+        if (event.target === lightbox) lightbox.close();
+      });
+      lightbox.addEventListener('close', () => {
+        lightboxImage.src = '';
+        if (lightboxTrigger) lightboxTrigger.focus();
+      });
+
+      function clearHighlights() {
+        document.querySelectorAll('mark.search-match').forEach((mark) => mark.replaceWith(document.createTextNode(mark.textContent)));
+      }
+
+      function highlightFirstMatch(section, query) {
+        const walker = document.createTreeWalker(section, NodeFilter.SHOW_TEXT, {
+          acceptNode(node) {
+            if (!node.parentElement || ['SCRIPT', 'STYLE', 'MARK'].includes(node.parentElement.tagName)) return NodeFilter.FILTER_REJECT;
+            return node.nodeValue.toLocaleLowerCase(currentLanguage).includes(query) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+          }
+        });
+        const node = walker.nextNode();
+        if (!node) return;
+        const source = node.nodeValue;
+        const index = source.toLocaleLowerCase(currentLanguage).indexOf(query);
+        const mark = document.createElement('mark');
+        mark.className = 'search-match';
+        mark.textContent = source.slice(index, index + query.length);
+        node.parentNode.insertBefore(document.createTextNode(source.slice(0, index)), node);
+        node.parentNode.insertBefore(mark, node);
+        node.nodeValue = source.slice(index + query.length);
+      }
+
+      function runSearch() {
+        clearHighlights();
+        const query = search.value.trim().toLocaleLowerCase(currentLanguage);
+        clearSearch.classList.toggle('visible', query.length > 0);
+        const activePanel = panels.find((panel) => panel.dataset.languagePanel === currentLanguage);
+        const activeSections = activePanel ? [...activePanel.querySelectorAll('.manual-section')] : [];
+        sections.filter((section) => !activeSections.includes(section)).forEach((section) => { section.hidden = false; });
+        let sectionMatches = 0;
+        activeSections.forEach((section) => {
+          const haystack = (section.textContent + ' ' + (section.dataset.searchable || '')).toLocaleLowerCase(currentLanguage);
+          const matches = !query || haystack.includes(query);
+          section.hidden = !matches;
+          if (matches) {
+            sectionMatches += 1;
+            if (query) highlightFirstMatch(section, query);
+          }
+        });
+        const activeToc = tocPanels.find((panel) => panel.dataset.languageToc === currentLanguage);
+        const activeTocLinks = activeToc ? [...activeToc.querySelectorAll('a')] : [];
+        tocLinks.filter((link) => !activeTocLinks.includes(link)).forEach((link) => link.classList.remove('search-hidden'));
+        let tocMatches = 0;
+        activeTocLinks.forEach((link) => {
+          const target = document.querySelector(link.getAttribute('href'));
+          const matches = !query || (target && !target.hidden) || (link.dataset.title || '').toLocaleLowerCase(currentLanguage).includes(query);
+          link.classList.toggle('search-hidden', !matches);
+          if (matches) tocMatches += 1;
+        });
+        tocEmpty.classList.toggle('visible', tocMatches === 0);
+        Object.entries(noResults).forEach(([lang, element]) => {
+          if (element) element.classList.toggle('visible', lang === currentLanguage && query.length > 0 && sectionMatches === 0);
+        });
+      }
+
+      search.addEventListener('input', runSearch);
+      clearSearch.addEventListener('click', () => {
+        search.value = '';
+        runSearch();
+        search.focus();
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting && !entry.target.hidden && entry.target.closest('[data-language-panel]')?.dataset.languagePanel === currentLanguage)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visible) return;
+        tocLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === '#' + visible.target.id));
+      }, { rootMargin: '-18% 0px -68% 0px', threshold: [0.01, 0.2, 0.6] });
+      sections.forEach((section) => observer.observe(section));
+
+      const systemLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+      setTheme(storage.get('ava-manual-theme') || (systemLight ? 'light' : 'dark'));
+      const initialTarget = window.location.hash ? document.getElementById(window.location.hash.slice(1)) : null;
+      const initialPanel = initialTarget ? initialTarget.closest('[data-language-panel]') : null;
+      const storedLanguage = storage.get('ava-manual-language');
+      const normalizedStoredLanguage = storedLanguage === 'en' ? 'en' : 'uk';
+      const initialLanguage = initialPanel ? initialPanel.dataset.languagePanel : normalizedStoredLanguage;
+      setLanguage(initialLanguage, !window.location.hash);
+      if (window.location.hash) {
+        window.requestAnimationFrame(() => {
+          const target = document.getElementById(window.location.hash.slice(1));
+          if (target) target.scrollIntoView({ block: 'start' });
+        });
+      }
+      window.addEventListener('hashchange', () => {
+        const target = document.getElementById(window.location.hash.slice(1));
+        const panel = target ? target.closest('[data-language-panel]') : null;
+        if (panel && panel.dataset.languagePanel !== currentLanguage) {
+          setLanguage(panel.dataset.languagePanel, false);
+          window.requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
